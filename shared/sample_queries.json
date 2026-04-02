@@ -1,697 +1,481 @@
 {
   "queries": [
     {
-      "query_id": "q-001",
-      "query": "How do I apply for financial aid?",
-      "expected_intent": "financial_aid",
-      "expected_department": "Financial Aid Office",
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-002",
-      "query": "What is the FAFSA deadline?",
-      "expected_intent": "financial_aid",
-      "expected_department": "Financial Aid Office",
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-003",
-      "query": "Can I get a scholarship?",
-      "expected_intent": "financial_aid",
-      "expected_department": "Financial Aid Office",
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-004",
-      "query": "My financial aid package seems lower than last year, how do I appeal?",
-      "expected_intent": "financial_aid",
-      "expected_department": "Financial Aid Office",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-005",
-      "query": "I got an outside scholarship, do I need to report it?",
-      "expected_intent": "financial_aid",
-      "expected_department": "Financial Aid Office",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-006",
-      "query": "What happens to my loans if I drop below half-time enrollment?",
-      "expected_intent": "financial_aid",
-      "expected_department": "Financial Aid Office",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-007",
-      "query": "My parents income changed after I filed FAFSA, can you reconsider my aid?",
-      "expected_intent": "financial_aid",
-      "expected_department": "Financial Aid Office",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Requires understanding of professional judgment appeals"
-    },
-    {
-      "query_id": "q-008",
-      "query": "I failed SAP but I had extenuating circumstances with my family last semester",
-      "expected_intent": "financial_aid",
-      "expected_department": "Financial Aid Office",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Satisfactory Academic Progress appeal - specialized financial aid knowledge"
-    },
-    {
-      "query_id": "q-009",
-      "query": "How do I register for classes?",
-      "expected_intent": "registration",
-      "expected_department": "Registrar",
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-010",
-      "query": "When does registration open for spring semester?",
-      "expected_intent": "registration",
-      "expected_department": "Registrar",
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-011",
-      "query": "How do I drop a class?",
-      "expected_intent": "registration",
-      "expected_department": "Registrar",
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-012",
-      "query": "I have a registration hold on my account, who do I contact?",
-      "expected_intent": "registration",
-      "expected_department": "Registrar",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-013",
-      "query": "The class I need is full but I really need it to graduate this year",
-      "expected_intent": "registration",
-      "expected_department": "Registrar",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-014",
-      "query": "Can I get a permission number to override the prerequisite?",
-      "expected_intent": "registration",
-      "expected_department": "Registrar",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-015",
-      "query": "I need to petition for retroactive withdrawal from last semester due to medical issues",
-      "expected_intent": "registration",
-      "expected_department": "Registrar",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Complex policy involving retroactive changes"
-    },
-    {
-      "query_id": "q-016",
-      "query": "My degree audit says I'm missing a requirement but I took an equivalent course at community college",
-      "expected_intent": "registration",
-      "expected_department": "Registrar",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Transfer credit evaluation issue"
-    },
-    {
-      "query_id": "q-017",
-      "query": "How do I apply for on-campus housing?",
-      "expected_intent": "housing",
-      "expected_department": "Housing Services",
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-018",
-      "query": "What are the dorm options for freshmen?",
-      "expected_intent": "housing",
-      "expected_department": "Housing Services",
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-019",
-      "query": "When is the housing application deadline?",
-      "expected_intent": "housing",
-      "expected_department": "Housing Services",
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-020",
-      "query": "My roommate and I are having serious conflicts, can I switch rooms?",
-      "expected_intent": "housing",
-      "expected_department": "Housing Services",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-021",
-      "query": "I need a single room for medical reasons, how do I request an accommodation?",
-      "expected_intent": "housing",
-      "expected_department": "Housing Services",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-022",
-      "query": "I'm being harassed by someone in my building and don't feel safe",
-      "expected_intent": "housing",
-      "expected_department": "Housing Services",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Safety concern requiring immediate attention and possibly multiple departments"
-    },
-    {
-      "query_id": "q-023",
-      "query": "I need to break my housing contract because I got an internship in another city",
-      "expected_intent": "housing",
-      "expected_department": "Housing Services",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Contract release request with financial implications"
-    },
-    {
-      "query_id": "q-024",
-      "query": "I can't afford the dorm costs, are there cheaper options or help available?",
-      "expected_intent": "housing",
-      "expected_department": "Housing Services",
-      "difficulty": "medium",
-      "is_ambiguous": true,
-      "notes": "Could be housing inquiry or financial aid question"
-    },
-    {
-      "query_id": "q-025",
-      "query": "I can't log into the student portal",
-      "expected_intent": "it_support",
-      "expected_department": "IT Help Desk",
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-026",
-      "query": "How do I reset my password?",
-      "expected_intent": "it_support",
-      "expected_department": "IT Help Desk",
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-027",
-      "query": "The campus wifi isn't working in my dorm",
-      "expected_intent": "it_support",
-      "expected_department": "IT Help Desk",
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-028",
-      "query": "I think someone hacked my student email account",
-      "expected_intent": "it_support",
-      "expected_department": "IT Help Desk",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-029",
-      "query": "How do I set up VPN to access library resources from off campus?",
-      "expected_intent": "it_support",
-      "expected_department": "IT Help Desk",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-030",
-      "query": "Canvas says I'm not enrolled in my class but I definitely registered",
-      "expected_intent": "it_support",
-      "expected_department": "IT Help Desk",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": "Could also involve registrar, but primary contact is IT"
-    },
-    {
-      "query_id": "q-031",
-      "query": "I got a phishing email that looked like it was from the university asking for my SSN",
-      "expected_intent": "it_support",
-      "expected_department": "IT Help Desk",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Security incident requiring specialized IT security response"
-    },
-    {
-      "query_id": "q-032",
-      "query": "I accidentally deleted my entire final project folder on the shared drive",
-      "expected_intent": "it_support",
-      "expected_department": "IT Help Desk",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Data recovery request requiring admin intervention"
-    },
-    {
-      "query_id": "q-033",
-      "query": "What classes should I take next semester?",
-      "expected_intent": "academic_advising",
-      "expected_department": "Academic Advising Center",
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-034",
-      "query": "How do I declare my major?",
-      "expected_intent": "academic_advising",
-      "expected_department": "Academic Advising Center",
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-035",
-      "query": "Who is my academic advisor?",
-      "expected_intent": "academic_advising",
-      "expected_department": "Academic Advising Center",
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-036",
-      "query": "I want to change my major from biology to computer science, what do I need to do?",
-      "expected_intent": "academic_advising",
-      "expected_department": "Academic Advising Center",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-037",
-      "query": "Can I double major in economics and math?",
-      "expected_intent": "academic_advising",
-      "expected_department": "Academic Advising Center",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-038",
-      "query": "I'm on academic probation and need help creating a plan to get back on track",
-      "expected_intent": "academic_advising",
-      "expected_department": "Academic Advising Center",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Requires intervention planning and support services coordination"
-    },
-    {
-      "query_id": "q-039",
-      "query": "I'm in my 5th year and still haven't figured out what I want to do after graduation",
-      "expected_intent": "academic_advising",
-      "expected_department": "Academic Advising Center",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Complex advising involving career counseling and academic planning"
-    },
-    {
-      "query_id": "q-040",
-      "query": "I'm struggling in all my classes and thinking about taking time off",
-      "expected_intent": "academic_advising",
-      "expected_department": "Academic Advising Center",
-      "difficulty": "medium",
-      "is_ambiguous": true,
-      "notes": "Could involve advising, counseling services, or registrar for leave of absence"
-    },
-    {
-      "query_id": "q-041",
-      "query": "How do I pay my tuition bill?",
-      "expected_intent": "student_accounts",
-      "expected_department": "Bursar/Student Accounts",
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-042",
-      "query": "When is the tuition payment deadline?",
-      "expected_intent": "student_accounts",
-      "expected_department": "Bursar/Student Accounts",
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-043",
-      "query": "Can I set up a payment plan?",
-      "expected_intent": "student_accounts",
-      "expected_department": "Bursar/Student Accounts",
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-044",
-      "query": "There's a charge on my account I don't recognize",
-      "expected_intent": "student_accounts",
-      "expected_department": "Bursar/Student Accounts",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-045",
-      "query": "My refund hasn't been deposited yet, it's been 3 weeks",
-      "expected_intent": "student_accounts",
-      "expected_department": "Bursar/Student Accounts",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-046",
-      "query": "I dropped a class after the refund deadline but I had a documented emergency",
-      "expected_intent": "student_accounts",
-      "expected_department": "Bursar/Student Accounts",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Exception request requiring policy review"
-    },
-    {
-      "query_id": "q-047",
-      "query": "My account was sent to collections but I never received any bills",
-      "expected_intent": "student_accounts",
-      "expected_department": "Bursar/Student Accounts",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Escalated billing dispute"
-    },
-    {
-      "query_id": "q-048",
-      "query": "I got a bill but my financial aid should cover everything",
-      "expected_intent": "student_accounts",
-      "expected_department": "Bursar/Student Accounts",
-      "difficulty": "medium",
-      "is_ambiguous": true,
-      "notes": "Could be student accounts or financial aid issue"
-    },
-    {
-      "query_id": "q-049",
-      "query": "Where is the library?",
-      "expected_intent": "general",
-      "expected_department": null,
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-050",
-      "query": "What time does the dining hall close?",
-      "expected_intent": "general",
-      "expected_department": null,
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-051",
-      "query": "Are there any clubs for international students?",
-      "expected_intent": "general",
-      "expected_department": null,
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-052",
-      "query": "I lost my student ID card, how do I get a replacement?",
-      "expected_intent": "general",
-      "expected_department": null,
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": null
-    },
-    {
-      "query_id": "q-053",
-      "query": "I need to talk to someone about the accessibility of campus buildings",
-      "expected_intent": "general",
-      "expected_department": null,
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Could involve disability services, facilities, or student affairs"
-    },
-    {
-      "query_id": "q-054",
-      "query": "I want to file a complaint about a professor's behavior in class",
-      "expected_intent": "general",
-      "expected_department": null,
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Sensitive issue requiring proper escalation path"
-    },
-    {
-      "query_id": "q-055",
-      "query": "I'm having a really hard time adjusting to college and don't know where to turn",
-      "expected_intent": "general",
-      "expected_department": null,
-      "difficulty": "medium",
-      "is_ambiguous": true,
-      "notes": "Could involve counseling, advising, or student affairs"
-    },
-    {
-      "query_id": "q-056",
-      "query": "I need help but I don't know what kind of help I need",
-      "expected_intent": "general",
-      "expected_department": null,
-      "difficulty": "hard",
-      "is_ambiguous": true,
-      "notes": "Intentionally vague, requires triage"
-    },
-    {
-      "query_id": "tpm-001",
-      "query": "The financial aid system integration is showing my award letter incorrectly after the batch update last night",
-      "expected_intent": "financial_aid",
-      "expected_department": "Financial Aid Office",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "System integration issue disguised as IT - but core issue is financial aid data"
-    },
-    {
-      "query_id": "tpm-002",
-      "query": "My work-study hours from last semester didn't sync to my payroll",
-      "expected_intent": "financial_aid",
-      "expected_department": "Financial Aid Office",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": "Cross-system data sync issue - work-study is financial aid"
-    },
-    {
-      "query_id": "tpm-003",
-      "query": "Can I get a breakdown of how the new scholarship algorithm calculated my merit award?",
-      "expected_intent": "financial_aid",
-      "expected_department": "Financial Aid Office",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": "Algorithm/system transparency question about financial aid"
-    },
-    {
-      "query_id": "tpm-004",
-      "query": "The course catalog API is returning different prerequisites than what my advisor told me",
-      "expected_intent": "registration",
-      "expected_department": "Registrar",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Data consistency between systems - course catalog is registrar owned"
-    },
-    {
-      "query_id": "tpm-005",
-      "query": "My transfer credits from the articulation agreement aren't mapping to the new degree requirements",
-      "expected_intent": "registration",
-      "expected_department": "Registrar",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Complex data migration issue - transfer credits are registrar"
-    },
-    {
-      "query_id": "tpm-006",
-      "query": "The waitlist notification system never emailed me when a spot opened",
-      "expected_intent": "registration",
-      "expected_department": "Registrar",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": "Notification pipeline failure - waitlist is registration"
-    },
-    {
-      "query_id": "tpm-007",
-      "query": "The housing portal assignment shows I'm in Building A but the access card system has me in Building B",
-      "expected_intent": "housing",
-      "expected_department": "Housing Services",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "System sync issue between housing and access control"
-    },
-    {
-      "query_id": "tpm-008",
-      "query": "I submitted my roommate preference but the matching algorithm paired me with someone I didn't select",
-      "expected_intent": "housing",
-      "expected_department": "Housing Services",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": "Algorithm discrepancy - roommate matching is housing"
-    },
-    {
-      "query_id": "tpm-009",
-      "query": "The room swap request form keeps timing out after I upload my documentation",
-      "expected_intent": "housing",
-      "expected_department": "Housing Services",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": "UI/technical issue but housing context - housing owns the form"
-    },
-    {
-      "query_id": "tpm-010",
-      "query": "The SSO redirect loop keeps happening when I switch between Canvas and the student portal",
-      "expected_intent": "it_support",
-      "expected_department": "IT Help Desk",
-      "difficulty": "easy",
-      "is_ambiguous": false,
-      "notes": "Clear technical issue - SSO is IT"
-    },
-    {
-      "query_id": "tpm-011",
-      "query": "My MFA token isn't syncing after the identity provider migration last week",
-      "expected_intent": "it_support",
-      "expected_department": "IT Help Desk",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": "Post-migration support - MFA is IT"
-    },
-    {
-      "query_id": "tpm-012",
-      "query": "The batch job that syncs my enrollment to Office 365 groups failed and I lost access to my team channels",
-      "expected_intent": "it_support",
-      "expected_department": "IT Help Desk",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Enterprise integration issue - O365 access is IT"
-    },
-    {
-      "query_id": "tpm-013",
-      "query": "The degree audit dashboard shows 100% complete but my advisor's system says I'm missing a capstone",
-      "expected_intent": "academic_advising",
-      "expected_department": "Academic Advising Center",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Dashboard data discrepancy - degree audit is advising"
-    },
-    {
-      "query_id": "tpm-014",
-      "query": "I need to know if the new data science certificate will count toward my CS minor requirements",
-      "expected_intent": "academic_advising",
-      "expected_department": "Academic Advising Center",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": "New program requirements - certificate/minor is advising"
-    },
-    {
-      "query_id": "tpm-015",
-      "query": "My four-year plan in the advising tool doesn't reflect the curriculum change that took effect this term",
-      "expected_intent": "academic_advising",
-      "expected_department": "Academic Advising Center",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Data not updated after policy change - advising tool is advising"
-    },
-    {
-      "query_id": "tpm-016",
-      "query": "The payment confirmation page showed success but my balance didn't update in the billing system",
-      "expected_intent": "student_accounts",
-      "expected_department": "Bursar/Student Accounts",
-      "difficulty": "medium",
-      "is_ambiguous": false,
-      "notes": "Transaction completion verification - billing is student accounts"
-    },
-    {
-      "query_id": "tpm-017",
-      "query": "I set up autopay but the system charged my old card after I updated my payment method",
-      "expected_intent": "student_accounts",
-      "expected_department": "Bursar/Student Accounts",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Payment method update failure - autopay is student accounts"
-    },
-    {
-      "query_id": "tpm-018",
-      "query": "The tuition estimator tool quoted me $5,000 less than what actually posted to my account",
-      "expected_intent": "student_accounts",
-      "expected_department": "Bursar/Student Accounts",
-      "difficulty": "hard",
-      "is_ambiguous": false,
-      "notes": "Calculator vs actual billing discrepancy - tuition billing is student accounts"
-    },
-    {
-      "query_id": "tpm-019",
-      "query": "The mobile app is crashing whenever I try to view my schedule and my bill at the same time",
-      "expected_intent": "general",
-      "expected_department": null,
-      "difficulty": "hard",
-      "is_ambiguous": true,
-      "notes": "Multi-module app crash - unclear owner, needs triage"
-    },
-    {
-      "query_id": "tpm-020",
-      "query": "I've contacted three different departments and no one can tell me why my account has a hold",
-      "expected_intent": "general",
-      "expected_department": null,
-      "difficulty": "hard",
-      "is_ambiguous": true,
-      "notes": "Multi-department escalation needed - frustration requires human"
-    },
-    {
-      "query_id": "tpm-021",
-      "query": "Who owns the data integration between the new CRM and the legacy student information system?",
-      "expected_intent": "general",
-      "expected_department": null,
-      "difficulty": "hard",
-      "is_ambiguous": true,
-      "notes": "System ownership question - requires human escalation"
+      "query_id": "ca-001",
+      "query": "How do I apply for CalFresh?",
+      "expected_intent": "calfresh_application",
+      "expected_department": "California Department of Social Services (CDSS)",
+      "priority": "medium",
+      "language": "en",
+      "notes": "Basic CalFresh benefit inquiry"
+    },
+    {
+      "query_id": "ca-002",
+      "query": "What's my CalWORKs eligibility?",
+      "expected_intent": "calworks_eligibility",
+      "expected_department": "California Department of Social Services (CDSS)",
+      "priority": "medium",
+      "language": "en",
+      "notes": "Eligibility determination for cash aid"
+    },
+    {
+      "query_id": "ca-003",
+      "query": "Where's my EBT card?",
+      "expected_intent": "ebt_card_status",
+      "expected_department": "California Department of Social Services (CDSS)",
+      "priority": "high",
+      "language": "en",
+      "notes": "Missing benefit card - urgent for food access"
+    },
+    {
+      "query_id": "ca-004",
+      "query": "Am I eligible for Medi-Cal?",
+      "expected_intent": "medi-cal_eligibility",
+      "expected_department": "Department of Health Care Services (DHCS)",
+      "priority": "medium",
+      "language": "en",
+      "notes": "Health coverage eligibility inquiry"
+    },
+    {
+      "query_id": "ca-005",
+      "query": "How do I renew my Medi-Cal coverage?",
+      "expected_intent": "medi-cal_renewal",
+      "expected_department": "Department of Health Care Services (DHCS)",
+      "priority": "high",
+      "language": "en",
+      "notes": "Redetermination/renewal process"
+    },
+    {
+      "query_id": "ca-006",
+      "query": "There's a wildfire near me, what should I do?",
+      "expected_intent": "wildfire_emergency",
+      "expected_department": "Cal OES - Governor's Office of Emergency Services",
+      "priority": "urgent",
+      "language": "en",
+      "notes": "Immediate safety concern - emergency routing"
+    },
+    {
+      "query_id": "ca-007",
+      "query": "Where's the nearest evacuation shelter?",
+      "expected_intent": "shelter_location",
+      "expected_department": "Cal OES - Governor's Office of Emergency Services",
+      "priority": "urgent",
+      "language": "en",
+      "notes": "Emergency shelter needed"
+    },
+    {
+      "query_id": "ca-008",
+      "query": "Is there an evacuation order for my area?",
+      "expected_intent": "evacuation_status",
+      "expected_department": "Cal OES - Governor's Office of Emergency Services",
+      "priority": "urgent",
+      "language": "en",
+      "notes": "Check evacuation order status"
+    },
+    {
+      "query_id": "ca-009",
+      "query": "How do I file for unemployment?",
+      "expected_intent": "unemployment_claim",
+      "expected_department": "Employment Development Department (EDD)",
+      "priority": "medium",
+      "language": "en",
+      "notes": "UI benefits application"
+    },
+    {
+      "query_id": "ca-010",
+      "query": "What's the status of my UI claim?",
+      "expected_intent": "unemployment_status",
+      "expected_department": "Employment Development Department (EDD)",
+      "priority": "high",
+      "language": "en",
+      "notes": "Existing claim status check"
+    },
+    {
+      "query_id": "ca-011",
+      "query": "How do I apply for disability insurance?",
+      "expected_intent": "disability_insurance_application",
+      "expected_department": "Employment Development Department (EDD)",
+      "priority": "medium",
+      "language": "en",
+      "notes": "SDI benefit application"
+    },
+    {
+      "query_id": "ca-012",
+      "query": "Where's my unemployment payment?",
+      "expected_intent": "unemployment_payment_issue",
+      "expected_department": "Employment Development Department (EDD)",
+      "priority": "high",
+      "language": "en",
+      "notes": "Missing payment - financial urgency"
+    },
+    {
+      "query_id": "ca-013",
+      "query": "How do I get a REAL ID?",
+      "expected_intent": "real_id_application",
+      "expected_department": "Department of Motor Vehicles (DMV)",
+      "priority": "medium",
+      "language": "en",
+      "notes": "REAL ID driver license"
+    },
+    {
+      "query_id": "ca-014",
+      "query": "When does my registration expire?",
+      "expected_intent": "vehicle_registration_status",
+      "expected_department": "Department of Motor Vehicles (DMV)",
+      "priority": "low",
+      "language": "en",
+      "notes": "Check vehicle registration date"
+    },
+    {
+      "query_id": "ca-015",
+      "query": "How do I make a DMV appointment?",
+      "expected_intent": "dmv_appointment",
+      "expected_department": "Department of Motor Vehicles (DMV)",
+      "priority": "medium",
+      "language": "en",
+      "notes": "Schedule DMV service"
+    },
+    {
+      "query_id": "ca-016",
+      "query": "How do I get a building permit?",
+      "expected_intent": "building_permit",
+      "expected_department": "Department of Housing & Community Development (HCD)",
+      "priority": "medium",
+      "language": "en",
+      "notes": "Building code and permit inquiry"
+    },
+    {
+      "query_id": "ca-017",
+      "query": "What's the status of my contractor license?",
+      "expected_intent": "contractor_license_status",
+      "expected_department": "Department of Consumer Affairs (DCA)",
+      "priority": "medium",
+      "language": "en",
+      "notes": "Professional licensing status"
+    },
+    {
+      "query_id": "ca-018",
+      "query": "How do I file a CPRA request?",
+      "expected_intent": "public_records_request",
+      "expected_department": "Government Operations Agency (GovOps)",
+      "priority": "medium",
+      "language": "en",
+      "notes": "California Public Records Act request"
+    },
+    {
+      "query_id": "ca-019",
+      "query": "Who do I contact about state procurement?",
+      "expected_intent": "procurement_inquiry",
+      "expected_department": "Department of General Services (DGS)",
+      "priority": "low",
+      "language": "en",
+      "notes": "Vendor/procurement general inquiry"
+    },
+    {
+      "query_id": "ca-020",
+      "query": "I need emergency food assistance right now",
+      "expected_intent": "emergency_food",
+      "expected_department": "California Department of Social Services (CDSS)",
+      "priority": "urgent",
+      "language": "en",
+      "notes": "Immediate need - expedited services"
+    },
+    {
+      "query_id": "ca-021",
+      "query": "My Medi-Cal coverage was terminated, how do I appeal?",
+      "expected_intent": "medi-cal_appeal",
+      "expected_department": "Department of Health Care Services (DHCS)",
+      "priority": "high",
+      "language": "en",
+      "notes": "Coverage loss - appeal process"
+    },
+    {
+      "query_id": "ca-022",
+      "query": "How do I get a burn permit?",
+      "expected_intent": "burn_permit",
+      "expected_department": "CAL FIRE - California Department of Forestry and Fire Protection",
+      "priority": "medium",
+      "language": "en",
+      "notes": "Fire prevention permit"
+    },
+    {
+      "query_id": "ca-023",
+      "query": "What are the fire restrictions in my area?",
+      "expected_intent": "fire_restrictions",
+      "expected_department": "CAL FIRE - California Department of Forestry and Fire Protection",
+      "priority": "medium",
+      "language": "en",
+      "notes": "Fire prevention information"
+    },
+    {
+      "query_id": "ca-024",
+      "query": "How do I apply for paid family leave?",
+      "expected_intent": "paid_family_leave",
+      "expected_department": "Employment Development Department (EDD)",
+      "priority": "medium",
+      "language": "en",
+      "notes": "PFL application"
+    },
+    {
+      "query_id": "ca-025",
+      "query": "I need my 1099-G tax form from EDD",
+      "expected_intent": "edd_tax_form",
+      "expected_department": "Employment Development Department (EDD)",
+      "priority": "high",
+      "language": "en",
+      "notes": "Tax documentation request"
+    },
+    {
+      "query_id": "ca-026",
+      "query": "How do I report a consumer fraud?",
+      "expected_intent": "consumer_complaint",
+      "expected_department": "Department of Consumer Affairs (DCA)",
+      "priority": "high",
+      "language": "en",
+      "notes": "Fraud reporting"
+    },
+    {
+      "query_id": "ca-027",
+      "query": "Where can I find affordable housing assistance?",
+      "expected_intent": "affordable_housing",
+      "expected_department": "Department of Housing & Community Development (HCD)",
+      "priority": "high",
+      "language": "en",
+      "notes": "Housing assistance programs"
+    },
+    {
+      "query_id": "ca-028",
+      "query": "What is the AI policy for state agencies?",
+      "expected_intent": "ai_policy",
+      "expected_department": "California Department of Technology (CDT)",
+      "priority": "low",
+      "language": "en",
+      "notes": "GenAI governance inquiry"
+    },
+    {
+      "query_id": "ca-029",
+      "query": "How do I get CEQA documents for a project?",
+      "expected_intent": "ceqa_documents",
+      "expected_department": "Governor's Office of Planning and Research (OPR)",
+      "priority": "medium",
+      "language": "en",
+      "notes": "Environmental review documents"
+    },
+    {
+      "query_id": "ca-030",
+      "query": "I'm homeless and need help",
+      "expected_intent": "homelessness_services",
+      "expected_department": "Department of Housing & Community Development (HCD)",
+      "priority": "urgent",
+      "language": "en",
+      "notes": "Immediate housing crisis"
+    },
+    {
+      "query_id": "ca-031",
+      "query": "How do I renew my driver's license online?",
+      "expected_intent": "license_renewal",
+      "expected_department": "Department of Motor Vehicles (DMV)",
+      "priority": "medium",
+      "language": "en",
+      "notes": "Online renewal process"
+    },
+    {
+      "query_id": "ca-032",
+      "query": "What disaster assistance is available after the earthquake?",
+      "expected_intent": "disaster_assistance",
+      "expected_department": "Cal OES - Governor's Office of Emergency Services",
+      "priority": "high",
+      "language": "en",
+      "notes": "Post-disaster recovery"
+    },
+    {
+      "query_id": "ca-033",
+      "query": "How do I verify a contractor's license?",
+      "expected_intent": "license_verification",
+      "expected_department": "Department of Consumer Affairs (DCA)",
+      "priority": "medium",
+      "language": "en",
+      "notes": "Check license validity"
+    },
+    {
+      "query_id": "ca-034",
+      "query": "I need to report a data breach at a state agency",
+      "expected_intent": "security_breach_report",
+      "expected_department": "California Department of Technology (CDT)",
+      "priority": "urgent",
+      "language": "en",
+      "notes": "Cybersecurity incident"
+    },
+    {
+      "query_id": "ca-035",
+      "query": "What are the income limits for CalFresh?",
+      "expected_intent": "calfresh_eligibility_limits",
+      "expected_department": "California Department of Social Services (CDSS)",
+      "priority": "low",
+      "language": "en",
+      "notes": "Eligibility criteria information"
+    },
+    {
+      "query_id": "ca-036",
+      "query": "How long does it take to process a Medi-Cal application?",
+      "expected_intent": "medi-cal_processing_time",
+      "expected_department": "Department of Health Care Services (DHCS)",
+      "priority": "medium",
+      "language": "en",
+      "notes": "Timeline inquiry"
+    },
+    {
+      "query_id": "ca-037",
+      "query": "Can I get a duplicate ID card?",
+      "expected_intent": "duplicate_id",
+      "expected_department": "Department of Motor Vehicles (DMV)",
+      "priority": "medium",
+      "language": "en",
+      "notes": "Replace lost ID card"
+    },
+    {
+      "query_id": "ca-038",
+      "query": "How do I bid on a state contract?",
+      "expected_intent": "state_contract_bidding",
+      "expected_department": "Department of General Services (DGS)",
+      "priority": "medium",
+      "language": "en",
+      "notes": "Procurement vendor inquiry"
+    },
+    {
+      "query_id": "ca-039",
+      "query": "What is the defensible space requirement for my property?",
+      "expected_intent": "defensible_space",
+      "expected_department": "CAL FIRE - California Department of Forestry and Fire Protection",
+      "priority": "medium",
+      "language": "en",
+      "notes": "Fire prevention compliance"
+    },
+    {
+      "query_id": "ca-040",
+      "query": "I was denied CalWORKs, how do I appeal?",
+      "expected_intent": "calworks_appeal",
+      "expected_department": "California Department of Social Services (CDSS)",
+      "priority": "high",
+      "language": "en",
+      "notes": "Appeal denied benefits"
+    },
+    {
+      "query_id": "ca-041",
+      "query": "¿Cómo solicito CalFresh?",
+      "expected_intent": "calfresh_application",
+      "expected_department": "California Department of Social Services (CDSS)",
+      "priority": "medium",
+      "language": "es",
+      "notes": "Spanish - CalFresh application"
+    },
+    {
+      "query_id": "ca-042",
+      "query": "¿Dónde está mi tarjeta EBT?",
+      "expected_intent": "ebt_card_status",
+      "expected_department": "California Department of Social Services (CDSS)",
+      "priority": "high",
+      "language": "es",
+      "notes": "Spanish - Missing EBT card"
+    },
+    {
+      "query_id": "ca-043",
+      "query": "¿Soy elegible para Medi-Cal?",
+      "expected_intent": "medi-cal_eligibility",
+      "expected_department": "Department of Health Care Services (DHCS)",
+      "priority": "medium",
+      "language": "es",
+      "notes": "Spanish - Medi-Cal eligibility"
+    },
+    {
+      "query_id": "ca-044",
+      "query": "¿Cómo solicito el seguro de desempleo?",
+      "expected_intent": "unemployment_claim",
+      "expected_department": "Employment Development Department (EDD)",
+      "priority": "medium",
+      "language": "es",
+      "notes": "Spanish - Unemployment insurance"
+    },
+    {
+      "query_id": "ca-045",
+      "query": "Necesito ayuda con mi licencia de conducir",
+      "expected_intent": "drivers_license_help",
+      "expected_department": "Department of Motor Vehicles (DMV)",
+      "priority": "medium",
+      "language": "es",
+      "notes": "Spanish - Driver's license assistance"
+    },
+    {
+      "query_id": "ca-046",
+      "query": "How do I certify for unemployment benefits?",
+      "expected_intent": "unemployment_certification",
+      "expected_department": "Employment Development Department (EDD)",
+      "priority": "high",
+      "language": "en",
+      "notes": "Bi-weekly certification requirement"
+    },
+    {
+      "query_id": "ca-047",
+      "query": "What housing programs are available for farmworkers?",
+      "expected_intent": "farmworker_housing",
+      "expected_department": "Department of Housing & Community Development (HCD)",
+      "priority": "medium",
+      "language": "en",
+      "notes": "Specialized housing assistance"
+    },
+    {
+      "query_id": "ca-048",
+      "query": "I need to report an unlicensed contractor",
+      "expected_intent": "unlicensed_contractor_complaint",
+      "expected_department": "Department of Consumer Affairs (DCA)",
+      "priority": "high",
+      "language": "en",
+      "notes": "Enforcement complaint"
+    },
+    {
+      "query_id": "ca-049",
+      "query": "How do I get emergency childcare assistance?",
+      "expected_intent": "emergency_childcare",
+      "expected_department": "California Department of Social Services (CDSS)",
+      "priority": "urgent",
+      "language": "en",
+      "notes": "Immediate childcare need"
+    },
+    {
+      "query_id": "ca-050",
+      "query": "What's the smoke forecast for my area during the fire?",
+      "expected_intent": "air_quality_fire",
+      "expected_department": "CAL FIRE - California Department of Forestry and Fire Protection",
+      "priority": "high",
+      "language": "en",
+      "notes": "Fire-related air quality"
     }
-  ]
+  ],
+  "metadata": {
+    "version": "2.0",
+    "total_queries": 50,
+    "domain": "California State Government Services",
+    "last_updated": "2026-02-02",
+    "languages": ["en", "es"],
+    "priority_distribution": {
+      "urgent": 7,
+      "high": 13,
+      "medium": 27,
+      "low": 3
+    },
+    "department_coverage": [
+      "CDSS",
+      "DHCS",
+      "CAL FIRE",
+      "Cal OES",
+      "EDD",
+      "CDT",
+      "DMV",
+      "DGS",
+      "OPR",
+      "HCD",
+      "DCA",
+      "GovOps"
+    ]
+  }
 }

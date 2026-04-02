@@ -1,122 +1,237 @@
 {
   "routing_rules": {
-    "version": "1.0",
-    "last_updated": "2026-02-02"
+    "version": "2.0",
+    "last_updated": "2026-02-02",
+    "domain": "California State Government Services"
   },
   "departments": [
     {
-      "id": "financial_aid",
-      "name": "Financial Aid Office",
-      "email": "finaid@university.edu",
-      "phone": "555-123-4001",
+      "id": "cdss",
+      "name": "California Department of Social Services (CDSS)",
+      "email": "cdss.inquiries@dss.ca.gov",
+      "phone": "1-877-847-3663",
       "business_hours": {
         "monday": {"open": "08:00", "close": "17:00"},
         "tuesday": {"open": "08:00", "close": "17:00"},
         "wednesday": {"open": "08:00", "close": "17:00"},
         "thursday": {"open": "08:00", "close": "17:00"},
-        "friday": {"open": "08:00", "close": "16:00"},
-        "saturday": {"open": null, "close": null},
-        "sunday": {"open": null, "close": null}
-      },
-      "timezone": "America/New_York",
-      "keywords": ["fafsa", "scholarship", "grant", "loan", "tuition", "payment plan", "work study", "aid", "financial"],
-      "priority_keywords": ["emergency fund", "financial hardship", "urgent financial"],
-      "categories": ["deadlines", "scholarships", "appeals", "payment_plans", "work_study"]
-    },
-    {
-      "id": "registration",
-      "name": "Office of the Registrar",
-      "email": "registrar@university.edu",
-      "phone": "555-123-4002",
-      "business_hours": {
-        "monday": {"open": "08:30", "close": "17:00"},
-        "tuesday": {"open": "08:30", "close": "17:00"},
-        "wednesday": {"open": "08:30", "close": "17:00"},
-        "thursday": {"open": "08:30", "close": "17:00"},
-        "friday": {"open": "08:30", "close": "16:30"},
-        "saturday": {"open": null, "close": null},
-        "sunday": {"open": null, "close": null}
-      },
-      "timezone": "America/New_York",
-      "keywords": ["register", "enroll", "transcript", "class", "course", "schedule", "add", "drop", "withdraw", "graduation", "degree", "major", "minor"],
-      "priority_keywords": ["graduation deadline", "late registration"],
-      "categories": ["enrollment", "transcripts", "add_drop", "degree_audit", "graduation"]
-    },
-    {
-      "id": "housing",
-      "name": "Housing & Residence Life",
-      "email": "housing@university.edu",
-      "phone": "555-123-4003",
-      "business_hours": {
-        "monday": {"open": "08:00", "close": "20:00"},
-        "tuesday": {"open": "08:00", "close": "20:00"},
-        "wednesday": {"open": "08:00", "close": "20:00"},
-        "thursday": {"open": "08:00", "close": "20:00"},
         "friday": {"open": "08:00", "close": "17:00"},
-        "saturday": {"open": "10:00", "close": "14:00"},
-        "sunday": {"open": null, "close": null}
-      },
-      "timezone": "America/New_York",
-      "keywords": ["dorm", "residence", "roommate", "housing", "move-in", "move-out", "room", "maintenance", "meal plan", "dining"],
-      "priority_keywords": ["emergency housing", "safety concern", "roommate conflict"],
-      "categories": ["applications", "roommates", "move_in", "maintenance", "meal_plans"]
-    },
-    {
-      "id": "it_support",
-      "name": "IT Help Desk",
-      "email": "helpdesk@university.edu",
-      "phone": "555-123-4004",
-      "business_hours": {
-        "monday": {"open": "07:00", "close": "22:00"},
-        "tuesday": {"open": "07:00", "close": "22:00"},
-        "wednesday": {"open": "07:00", "close": "22:00"},
-        "thursday": {"open": "07:00", "close": "22:00"},
-        "friday": {"open": "07:00", "close": "20:00"},
-        "saturday": {"open": "09:00", "close": "17:00"},
-        "sunday": {"open": "12:00", "close": "20:00"}
-      },
-      "timezone": "America/New_York",
-      "keywords": ["password", "login", "email", "wifi", "internet", "canvas", "lms", "computer", "software", "vpn", "network", "account locked"],
-      "priority_keywords": ["account compromised", "security breach", "phishing"],
-      "categories": ["passwords", "email", "lms", "wifi", "software"]
-    },
-    {
-      "id": "academic_advising",
-      "name": "Academic Advising Center",
-      "email": "advising@university.edu",
-      "phone": "555-123-4005",
-      "business_hours": {
-        "monday": {"open": "08:00", "close": "17:00"},
-        "tuesday": {"open": "08:00", "close": "17:00"},
-        "wednesday": {"open": "08:00", "close": "19:00"},
-        "thursday": {"open": "08:00", "close": "17:00"},
-        "friday": {"open": "08:00", "close": "16:00"},
         "saturday": {"open": null, "close": null},
         "sunday": {"open": null, "close": null}
       },
-      "timezone": "America/New_York",
-      "keywords": ["advisor", "degree", "requirements", "major", "minor", "prerequisite", "academic plan", "career", "internship"],
-      "priority_keywords": ["academic probation", "dismissal appeal"],
-      "categories": ["degree_requirements", "major_declaration", "academic_planning"]
+      "timezone": "America/Los_Angeles",
+      "keywords": ["calfresh", "calworks", "benefits", "snap", "welfare", "food stamps", "general relief", "capi", "cash aid", "tanf", "ebt", "supplemental nutrition", "welfare to work", "aid", "assistance"],
+      "priority_keywords": ["benefit termination", "emergency aid", "homeless", "immediate need", "no food"],
+      "categories": ["calfresh", "calworks", "general_assistance", "capi", "eligibility", "appeals"]
     },
     {
-      "id": "student_accounts",
-      "name": "Student Financial Services",
-      "email": "studentaccounts@university.edu",
-      "phone": "555-123-4006",
+      "id": "dhcs",
+      "name": "Department of Health Care Services (DHCS)",
+      "email": "dhcs.info@dhcs.ca.gov",
+      "phone": "1-916-440-7400",
       "business_hours": {
         "monday": {"open": "08:00", "close": "17:00"},
         "tuesday": {"open": "08:00", "close": "17:00"},
         "wednesday": {"open": "08:00", "close": "17:00"},
         "thursday": {"open": "08:00", "close": "17:00"},
-        "friday": {"open": "08:00", "close": "16:00"},
+        "friday": {"open": "08:00", "close": "17:00"},
         "saturday": {"open": null, "close": null},
         "sunday": {"open": null, "close": null}
       },
-      "timezone": "America/New_York",
-      "keywords": ["bill", "balance", "payment", "refund", "1098", "tax", "charge", "fee", "invoice"],
-      "priority_keywords": ["late fee", "registration hold", "payment deadline"],
-      "categories": ["billing", "payments", "refunds", "tax_forms"]
+      "timezone": "America/Los_Angeles",
+      "keywords": ["medi-cal", "medicaid", "health coverage", "eligibility", "enrollment", "health insurance", "medical", "healthcare", "covered california", "health plan", "redetermination", "renewal"],
+      "priority_keywords": ["coverage lapse", "emergency medical", "urgent care coverage"],
+      "categories": ["medi-cal_eligibility", "enrollment", "renewal", "coverage", "appeals"]
+    },
+    {
+      "id": "cal_fire",
+      "name": "CAL FIRE - California Department of Forestry and Fire Protection",
+      "email": "calfire.info@fire.ca.gov",
+      "phone": "1-916-653-5123",
+      "business_hours": {
+        "monday": {"open": "08:00", "close": "17:00"},
+        "tuesday": {"open": "08:00", "close": "17:00"},
+        "wednesday": {"open": "08:00", "close": "17:00"},
+        "thursday": {"open": "08:00", "close": "17:00"},
+        "friday": {"open": "08:00", "close": "17:00"},
+        "saturday": {"open": null, "close": null},
+        "sunday": {"open": null, "close": null}
+      },
+      "timezone": "America/Los_Angeles",
+      "keywords": ["wildfire", "fire", "burn", "evacuation", "fire prevention", "fire permit", "burn permit", "defensible space", "fire hazard", "smoke", "air quality fire"],
+      "priority_keywords": ["active fire", "evacuation order", "fire near me", "emergency fire"],
+      "categories": ["wildfire_info", "permits", "prevention", "evacuation"]
+    },
+    {
+      "id": "cal_oes",
+      "name": "Cal OES - Governor's Office of Emergency Services",
+      "email": "caloes.info@caloes.ca.gov",
+      "phone": "1-916-845-8510",
+      "business_hours": {
+        "monday": {"open": "00:00", "close": "23:59"},
+        "tuesday": {"open": "00:00", "close": "23:59"},
+        "wednesday": {"open": "00:00", "close": "23:59"},
+        "thursday": {"open": "00:00", "close": "23:59"},
+        "friday": {"open": "00:00", "close": "23:59"},
+        "saturday": {"open": "00:00", "close": "23:59"},
+        "sunday": {"open": "00:00", "close": "23:59"}
+      },
+      "timezone": "America/Los_Angeles",
+      "keywords": ["emergency", "disaster", "earthquake", "flood", "shelter", "evacuation order", "tsunami", "emergency alert", "disaster assistance", "fema", "crisis"],
+      "priority_keywords": ["immediate danger", "active emergency", "life threatening", "evacuation now"],
+      "categories": ["emergency_response", "disaster_assistance", "shelter", "alerts"]
+    },
+    {
+      "id": "edd",
+      "name": "Employment Development Department (EDD)",
+      "email": "edd.askedd@edd.ca.gov",
+      "phone": "1-800-300-5616",
+      "business_hours": {
+        "monday": {"open": "08:00", "close": "17:00"},
+        "tuesday": {"open": "08:00", "close": "17:00"},
+        "wednesday": {"open": "08:00", "close": "17:00"},
+        "thursday": {"open": "08:00", "close": "17:00"},
+        "friday": {"open": "08:00", "close": "17:00"},
+        "saturday": {"open": null, "close": null},
+        "sunday": {"open": null, "close": null}
+      },
+      "timezone": "America/Los_Angeles",
+      "keywords": ["unemployment", "disability insurance", "paid family leave", "ui claim", "edd", "job", "pfl", "sdi", "certify", "benefit payment", "claim status", "1099-g", "tax form"],
+      "priority_keywords": ["missed payment", "claim denied", "benefit stopped", "account suspended"],
+      "categories": ["unemployment_insurance", "disability_insurance", "paid_family_leave", "tax_forms"]
+    },
+    {
+      "id": "cdt",
+      "name": "California Department of Technology (CDT)",
+      "email": "cdt.info@state.ca.gov",
+      "phone": "1-916-431-5400",
+      "business_hours": {
+        "monday": {"open": "08:00", "close": "17:00"},
+        "tuesday": {"open": "08:00", "close": "17:00"},
+        "wednesday": {"open": "08:00", "close": "17:00"},
+        "thursday": {"open": "08:00", "close": "17:00"},
+        "friday": {"open": "08:00", "close": "17:00"},
+        "saturday": {"open": null, "close": null},
+        "sunday": {"open": null, "close": null}
+      },
+      "timezone": "America/Los_Angeles",
+      "keywords": ["technology", "cybersecurity", "it", "state network", "genai", "ai policy", "digital services", "technology modernization", "data", "innovation"],
+      "priority_keywords": ["security breach", "cyber attack", "data breach", "system down"],
+      "categories": ["technology_policy", "cybersecurity", "digital_innovation", "ai_governance"]
+    },
+    {
+      "id": "dmv",
+      "name": "Department of Motor Vehicles (DMV)",
+      "email": "dmv.info@dmv.ca.gov",
+      "phone": "1-800-777-0133",
+      "business_hours": {
+        "monday": {"open": "08:00", "close": "17:00"},
+        "tuesday": {"open": "08:00", "close": "17:00"},
+        "wednesday": {"open": "09:00", "close": "17:00"},
+        "thursday": {"open": "08:00", "close": "17:00"},
+        "friday": {"open": "08:00", "close": "17:00"},
+        "saturday": {"open": "08:00", "close": "12:00"},
+        "sunday": {"open": null, "close": null}
+      },
+      "timezone": "America/Los_Angeles",
+      "keywords": ["license", "registration", "vehicle", "driving", "id card", "real id", "dmv appointment", "driver test", "smog", "title", "tags", "renewal", "duplicate license"],
+      "priority_keywords": ["license expiring", "registration expired", "suspended license"],
+      "categories": ["drivers_license", "vehicle_registration", "id_cards", "appointments"]
+    },
+    {
+      "id": "dgs",
+      "name": "Department of General Services (DGS)",
+      "email": "dgs.info@dgs.ca.gov",
+      "phone": "1-916-376-5000",
+      "business_hours": {
+        "monday": {"open": "08:00", "close": "17:00"},
+        "tuesday": {"open": "08:00", "close": "17:00"},
+        "wednesday": {"open": "08:00", "close": "17:00"},
+        "thursday": {"open": "08:00", "close": "17:00"},
+        "friday": {"open": "08:00", "close": "17:00"},
+        "saturday": {"open": null, "close": null},
+        "sunday": {"open": null, "close": null}
+      },
+      "timezone": "America/Los_Angeles",
+      "keywords": ["procurement", "contracts", "purchasing", "state property", "fleet", "vendor", "bidding", "rfp", "state contracts", "facilities"],
+      "priority_keywords": ["contract protest", "bid deadline", "urgent procurement"],
+      "categories": ["procurement", "contracts", "real_estate", "fleet_services"]
+    },
+    {
+      "id": "opr",
+      "name": "Governor's Office of Planning and Research (OPR)",
+      "email": "opr.info@opr.ca.gov",
+      "phone": "1-916-322-2318",
+      "business_hours": {
+        "monday": {"open": "08:00", "close": "17:00"},
+        "tuesday": {"open": "08:00", "close": "17:00"},
+        "wednesday": {"open": "08:00", "close": "17:00"},
+        "thursday": {"open": "08:00", "close": "17:00"},
+        "friday": {"open": "08:00", "close": "17:00"},
+        "saturday": {"open": null, "close": null},
+        "sunday": {"open": null, "close": null}
+      },
+      "timezone": "America/Los_Angeles",
+      "keywords": ["planning", "environmental review", "ceqa", "housing element", "general plan", "environmental impact", "land use", "climate"],
+      "priority_keywords": ["ceqa deadline", "comment period ending"],
+      "categories": ["environmental_review", "planning", "housing_policy"]
+    },
+    {
+      "id": "hcd",
+      "name": "Department of Housing & Community Development (HCD)",
+      "email": "hcd.info@hcd.ca.gov",
+      "phone": "1-916-445-4782",
+      "business_hours": {
+        "monday": {"open": "08:00", "close": "17:00"},
+        "tuesday": {"open": "08:00", "close": "17:00"},
+        "wednesday": {"open": "08:00", "close": "17:00"},
+        "thursday": {"open": "08:00", "close": "17:00"},
+        "friday": {"open": "08:00", "close": "17:00"},
+        "saturday": {"open": null, "close": null},
+        "sunday": {"open": null, "close": null}
+      },
+      "timezone": "America/Los_Angeles",
+      "keywords": ["housing", "affordable housing", "building codes", "permits", "homelessness", "manufactured housing", "farmworker housing", "housing development", "building standards"],
+      "priority_keywords": ["homeless", "eviction", "housing emergency"],
+      "categories": ["affordable_housing", "building_codes", "homelessness_programs", "housing_development"]
+    },
+    {
+      "id": "dca",
+      "name": "Department of Consumer Affairs (DCA)",
+      "email": "dca.info@dca.ca.gov",
+      "phone": "1-800-952-5210",
+      "business_hours": {
+        "monday": {"open": "08:00", "close": "17:00"},
+        "tuesday": {"open": "08:00", "close": "17:00"},
+        "wednesday": {"open": "08:00", "close": "17:00"},
+        "thursday": {"open": "08:00", "close": "17:00"},
+        "friday": {"open": "08:00", "close": "17:00"},
+        "saturday": {"open": null, "close": null},
+        "sunday": {"open": null, "close": null}
+      },
+      "timezone": "America/Los_Angeles",
+      "keywords": ["professional license", "consumer complaint", "contractor", "business license", "license verification", "complaint", "fraud", "scam", "unlicensed contractor"],
+      "priority_keywords": ["fraud", "scam", "unsafe practice", "immediate harm"],
+      "categories": ["licensing", "consumer_complaints", "enforcement", "verification"]
+    },
+    {
+      "id": "govops",
+      "name": "Government Operations Agency (GovOps)",
+      "email": "govops.info@govops.ca.gov",
+      "phone": "1-916-653-4090",
+      "business_hours": {
+        "monday": {"open": "08:00", "close": "17:00"},
+        "tuesday": {"open": "08:00", "close": "17:00"},
+        "wednesday": {"open": "08:00", "close": "17:00"},
+        "thursday": {"open": "08:00", "close": "17:00"},
+        "friday": {"open": "08:00", "close": "17:00"},
+        "saturday": {"open": null, "close": null},
+        "sunday": {"open": null, "close": null}
+      },
+      "timezone": "America/Los_Angeles",
+      "keywords": ["state operations", "cross-agency", "shared services", "it modernization", "government efficiency", "public records", "cpra", "information practices"],
+      "priority_keywords": ["cpra request", "public records urgent", "transparency"],
+      "categories": ["state_operations", "public_records", "cross_agency_services"]
     }
   ],
   "escalation_triggers": {
@@ -124,17 +239,21 @@
       "suicide", "self-harm", "kill myself", "end my life",
       "threat", "violence", "weapon", "harm others",
       "lawyer", "lawsuit", "legal action",
-      "title ix", "sexual harassment", "assault"
+      "abuse", "assault", "sexual harassment",
+      "whistleblower", "fraud report", "corruption"
     ],
     "priority": [
-      "discrimination", "ada", "disability accommodation",
-      "emergency", "urgent", "critical",
-      "complaint", "formal grievance"
+      "discrimination", "ada", "disability accommodation", "civil rights",
+      "emergency", "urgent", "critical", "life threatening",
+      "complaint", "formal grievance", "appeal deadline",
+      "cpra", "public records act", "information request urgent",
+      "constituent threat", "elected official", "media inquiry"
     ]
   },
   "default_routing": {
-    "unclassified_intent": "general",
+    "unclassified_intent": "govops",
     "ambiguous_after_clarification": "human_escalation",
-    "outside_business_hours": "create_ticket_for_next_day"
+    "outside_business_hours": "create_ticket_for_next_day",
+    "multilingual_request": "route_to_language_line"
   }
 }
