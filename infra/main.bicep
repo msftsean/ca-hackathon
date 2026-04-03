@@ -1,8 +1,8 @@
-// University Front Door Support Agent - Azure Infrastructure
+// CA Hackathon Accelerator Platform - Azure Infrastructure
 // Deploy with: azd provision
 
 @description('Name prefix for all resources')
-param resourcePrefix string = 'frontdoor'
+param resourcePrefix string = 'cahack'
 
 @description('Location for all resources')
 param location string = resourceGroup().location
@@ -22,6 +22,18 @@ param realtimeModelVersion string = '2024-12-17'
 @description('Enable mock mode (no external service connections)')
 param mockMode bool = false
 
+@description('List of accelerator IDs to deploy')
+param acceleratorIds array = [
+  '001'
+  '002'
+  '003'
+  '004'
+  '005'
+  '006'
+  '007'
+  '008'
+]
+
 @description('Deployment timestamp for tagging')
 param deploymentDate string = utcNow('yyyy-MM-dd')
 
@@ -32,10 +44,25 @@ var keyVaultName = take(replace('${resourcePrefix}${resourceToken}kv', '-', ''),
 var cosmosToken = toLower(uniqueString(subscription().id, resourceGroup().id, cosmosLocation))
 var cosmosAccountName = '${resourcePrefix}-${cosmosToken}-cosmos'
 
+// Accelerator configuration
+var acceleratorConfig = [
+  { id: '001', name: 'benefitscal-navigator', hasFrontend: true }
+  { id: '002', name: 'wildfire-response', hasFrontend: true }
+  { id: '003', name: 'medi-cal-eligibility', hasFrontend: true }
+  { id: '004', name: 'permit-streamliner', hasFrontend: true }
+  { id: '005', name: 'procurement-compliance', hasFrontend: false }
+  { id: '006', name: 'knowledge-hub', hasFrontend: true }
+  { id: '007', name: 'edd-claims', hasFrontend: true }
+  { id: '008', name: 'emergency-chat', hasFrontend: true }
+]
+
+// Filter to only deploy requested accelerators
+var activeAccelerators = [for config in acceleratorConfig: config if contains(acceleratorIds, config.id)]
+
 // Tags for all resources
 var tags = {
   'azd-env-name': resourcePrefix
-  'solution-accelerator': 'university-front-door-agent'
+  'solution-accelerator': 'ca-hackathon-accelerator'
   'deployment-date': deploymentDate
 }
 
@@ -117,10 +144,10 @@ resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-11-15' = if (
 
 resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023-11-15' = if (!mockMode) {
   parent: cosmosAccount
-  name: 'frontdoor'
+  name: 'cahackathon'
   properties: {
     resource: {
-      id: 'frontdoor'
+      id: 'cahackathon'
     }
   }
 }
@@ -172,6 +199,40 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
     replicaCount: 1
     partitionCount: 1
     hostingMode: 'default'
+  }
+}
+
+// ============================================================================
+// Azure Translator (for 008-multilingual-emergency-chat)
+// ============================================================================
+resource translator 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
+  name: '${prefix}-translator'
+  location: location
+  tags: tags
+  kind: 'TextTranslation'
+  sku: {
+    name: 'S1'
+  }
+  properties: {
+    customSubDomainName: '${prefix}-translator'
+    publicNetworkAccess: 'Enabled'
+  }
+}
+
+// ============================================================================
+// Azure Document Intelligence (for 003-medi-cal-eligibility)
+// ============================================================================
+resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
+  name: '${prefix}-docintl'
+  location: location
+  tags: tags
+  kind: 'FormRecognizer'
+  sku: {
+    name: 'S0'
+  }
+  properties: {
+    customSubDomainName: '${prefix}-docintl'
+    publicNetworkAccess: 'Enabled'
   }
 }
 
@@ -357,7 +418,7 @@ resource backendContainerApp 'Microsoft.App/containerApps@2023-08-01-preview' = 
             }
             {
               name: 'AZURE_COSMOS_DATABASE'
-              value: mockMode ? 'frontdoor' : cosmosDatabase.name
+              value: mockMode ? 'cahackathon' : cosmosDatabase.name
             }
             {
               name: 'AZURE_SEARCH_ENDPOINT'
@@ -477,13 +538,167 @@ resource frontendContainerApp 'Microsoft.App/containerApps@2023-08-01-preview' =
 }
 
 // ============================================================================
+// Accelerator Container Apps
+// ============================================================================
+
+// Accelerator backend Container Apps
+resource accelBackends 'Microsoft.App/containerApps@2023-08-01-preview' = [for accel in activeAccelerators: {
+  name: '${prefix}-accel-${accel.id}-be'
+  location: location
+  tags: union(tags, {
+    'azd-service-name': 'accel-${accel.id}'
+  })
+  identity: {
+    type: 'SystemAssigned'
+  }
+  properties: {
+    managedEnvironmentId: containerAppEnv.id
+    configuration: {
+      ingress: {
+        external: true
+        targetPort: 8000
+        transport: 'auto'
+      }
+      secrets: [
+        {
+          name: 'acr-password'
+          value: containerRegistry.listCredentials().passwords[0].value
+        }
+      ]
+      registries: [
+        {
+          server: containerRegistry.properties.loginServer
+          username: containerRegistry.listCredentials().username
+          passwordSecretRef: 'acr-password'
+        }
+      ]
+    }
+    template: {
+      containers: [
+        {
+          name: 'backend'
+          image: 'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
+          env: [
+            {
+              name: 'USE_MOCK_SERVICES'
+              value: string(mockMode)
+            }
+            {
+              name: 'AZURE_OPENAI_ENDPOINT'
+              value: openAi.properties.endpoint
+            }
+            {
+              name: 'AZURE_OPENAI_DEPLOYMENT'
+              value: openAiDeployment.name
+            }
+            {
+              name: 'AZURE_SEARCH_ENDPOINT'
+              value: 'https://${searchService.name}.search.windows.net'
+            }
+          ]
+          resources: {
+            cpu: json('0.5')
+            memory: '1Gi'
+          }
+        }
+      ]
+      scale: {
+        minReplicas: 0
+        maxReplicas: 2
+      }
+    }
+  }
+}]
+
+// Accelerator frontend Container Apps (only for accelerators with frontends)
+resource accelFrontends 'Microsoft.App/containerApps@2023-08-01-preview' = [for (accel, i) in activeAccelerators: if (accel.hasFrontend) {
+  name: '${prefix}-accel-${accel.id}-fe'
+  location: location
+  tags: union(tags, {
+    'azd-service-name': 'accel-${accel.id}-fe'
+  })
+  properties: {
+    managedEnvironmentId: containerAppEnv.id
+    configuration: {
+      ingress: {
+        external: true
+        targetPort: 80
+        transport: 'auto'
+      }
+      secrets: [
+        {
+          name: 'acr-password'
+          value: containerRegistry.listCredentials().passwords[0].value
+        }
+      ]
+      registries: [
+        {
+          server: containerRegistry.properties.loginServer
+          username: containerRegistry.listCredentials().username
+          passwordSecretRef: 'acr-password'
+        }
+      ]
+    }
+    template: {
+      containers: [
+        {
+          name: 'frontend'
+          image: 'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
+          env: [
+            {
+              name: 'BACKEND_URL'
+              value: 'https://${accelBackends[i].properties.configuration.ingress.fqdn}'
+            }
+          ]
+          resources: {
+            cpu: json('0.25')
+            memory: '0.5Gi'
+          }
+        }
+      ]
+      scale: {
+        minReplicas: 0
+        maxReplicas: 2
+      }
+    }
+  }
+}]
+
+// ============================================================================
+// Role Assignments for Accelerator Managed Identities
+// ============================================================================
+
+// Grant all accelerator backends OpenAI access
+resource accelOpenAIRoles 'Microsoft.Authorization/roleAssignments@2022-04-01' = [for (accel, i) in activeAccelerators: {
+  name: guid(openAi.id, accelBackends[i].id, cognitiveServicesOpenAIUserRoleId)
+  scope: openAi
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', cognitiveServicesOpenAIUserRoleId)
+    principalId: accelBackends[i].identity.principalId
+    principalType: 'ServicePrincipal'
+  }
+}]
+
+// AI Search data reader role for accelerators
+var searchIndexDataReaderRoleId = '1407120a-92aa-4202-b7e9-c0e197c71c8f'
+resource accelSearchRoles 'Microsoft.Authorization/roleAssignments@2022-04-01' = [for (accel, i) in activeAccelerators: {
+  name: guid(searchService.id, accelBackends[i].id, searchIndexDataReaderRoleId)
+  scope: searchService
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', searchIndexDataReaderRoleId)
+    principalId: accelBackends[i].identity.principalId
+    principalType: 'ServicePrincipal'
+  }
+}]
+
+// ============================================================================
 // Outputs for azd
 // ============================================================================
 output AZURE_OPENAI_ENDPOINT string = openAi.properties.endpoint
 output AZURE_OPENAI_DEPLOYMENT string = openAiDeployment.name
 output AZURE_OPENAI_REALTIME_DEPLOYMENT string = openAiRealtimeDeployment.name
 output AZURE_COSMOS_ENDPOINT string = mockMode ? '' : cosmosAccount.properties.documentEndpoint
-output AZURE_COSMOS_DATABASE string = mockMode ? 'frontdoor' : cosmosDatabase.name
+output AZURE_COSMOS_DATABASE string = mockMode ? 'cahackathon' : cosmosDatabase.name
 output AZURE_SEARCH_ENDPOINT string = 'https://${searchService.name}.search.windows.net'
 output AZURE_CONTAINER_REGISTRY_ENDPOINT string = containerRegistry.properties.loginServer
 output AZURE_CONTAINER_ENV_ID string = containerAppEnv.id
@@ -493,3 +708,8 @@ output AZURE_RESOURCE_GROUP string = resourceGroup().name
 output AZURE_KEY_VAULT_NAME string = keyVault.name
 output AZURE_ACS_ENDPOINT string = mockMode ? '' : 'https://${acs.properties.hostName}'
 output MOCK_MODE bool = mockMode
+output ACCELERATOR_BACKEND_URLS array = [for (accel, i) in activeAccelerators: {
+  id: accel.id
+  name: accel.name
+  url: 'https://${accelBackends[i].properties.configuration.ingress.fqdn}'
+}]

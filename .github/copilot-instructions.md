@@ -23,3 +23,14 @@ This repository contains **8 AI accelerators** for California state government a
 - 006: Cross-Agency Knowledge Hub (GovOps)
 - 007: EDD Claims Assistant (EDD)
 - 008: Multilingual Emergency Chatbot (Cal OES)
+
+## Azure Deployment Commands
+
+- `azd up` — Full deployment (provision + deploy all services)
+- `azd deploy accel-001` — Deploy single accelerator backend
+- `azd deploy accel-001-fe` — Deploy single accelerator frontend
+- `./scripts/azd-deploy.sh all` — Deploy everything via helper script
+- `./scripts/azd-deploy.sh 001` — Deploy specific accelerator (backend + frontend)
+- `docker-compose -f docker-compose.accelerators.yml up` — Run all accelerators locally
+
+Each accelerator is independently deployable via Azure Container Apps. All accelerators support both `USE_MOCK_SERVICES=true` (local dev) and real Azure service connections via managed identity (DefaultAzureCredential).

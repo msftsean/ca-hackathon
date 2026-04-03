@@ -1,9 +1,9 @@
-# Azure Developer CLI (azd) configuration for University Front Door Support Agent
+# Azure Developer CLI (azd) configuration for CA Hackathon Accelerators
 # Run `azd up` to provision and deploy the solution
 
-name: ca-hackathon-accelerator
+name: ca-hackathon-accelerators
 metadata:
-  template: ca-hackathon-accelerator@1.0.0
+  template: ca-hackathon-accelerators@1.0.0
 
 services:
   backend:
@@ -20,34 +20,140 @@ services:
     docker:
       path: Dockerfile
 
+  accel-001:
+    project: ./accelerators/001-benefitscal-navigator/backend
+    language: python
+    host: containerapp
+    docker:
+      path: Dockerfile
+
+  accel-001-fe:
+    project: ./accelerators/001-benefitscal-navigator/frontend
+    language: js
+    host: containerapp
+    docker:
+      path: Dockerfile
+
+  accel-002:
+    project: ./accelerators/002-wildfire-response-coordinator/backend
+    language: python
+    host: containerapp
+    docker:
+      path: Dockerfile
+
+  accel-002-fe:
+    project: ./accelerators/002-wildfire-response-coordinator/frontend
+    language: js
+    host: containerapp
+    docker:
+      path: Dockerfile
+
+  accel-003:
+    project: ./accelerators/003-medi-cal-eligibility/backend
+    language: python
+    host: containerapp
+    docker:
+      path: Dockerfile
+
+  accel-003-fe:
+    project: ./accelerators/003-medi-cal-eligibility/frontend
+    language: js
+    host: containerapp
+    docker:
+      path: Dockerfile
+
+  accel-004:
+    project: ./accelerators/004-permit-streamliner/backend
+    language: python
+    host: containerapp
+    docker:
+      path: Dockerfile
+
+  accel-004-fe:
+    project: ./accelerators/004-permit-streamliner/frontend
+    language: js
+    host: containerapp
+    docker:
+      path: Dockerfile
+
+  accel-005:
+    project: ./accelerators/005-genai-procurement-compliance/backend
+    language: python
+    host: containerapp
+    docker:
+      path: Dockerfile
+
+  accel-006:
+    project: ./accelerators/006-cross-agency-knowledge-hub/backend
+    language: python
+    host: containerapp
+    docker:
+      path: Dockerfile
+
+  accel-006-fe:
+    project: ./accelerators/006-cross-agency-knowledge-hub/frontend
+    language: js
+    host: containerapp
+    docker:
+      path: Dockerfile
+
+  accel-007:
+    project: ./accelerators/007-edd-claims-assistant/backend
+    language: python
+    host: containerapp
+    docker:
+      path: Dockerfile
+
+  accel-007-fe:
+    project: ./accelerators/007-edd-claims-assistant/frontend
+    language: js
+    host: containerapp
+    docker:
+      path: Dockerfile
+
+  accel-008:
+    project: ./accelerators/008-multilingual-emergency-chat/backend
+    language: python
+    host: containerapp
+    docker:
+      path: Dockerfile
+
+  accel-008-fe:
+    project: ./accelerators/008-multilingual-emergency-chat/frontend
+    language: js
+    host: containerapp
+    docker:
+      path: Dockerfile
+
 # Azure infrastructure
 infra:
   provider: bicep
   path: ./infra
   module: main
 
+# Pipeline configuration for CI/CD
+pipeline:
+  provider: github
+
 # Hooks for deployment lifecycle
 hooks:
   preprovision:
     shell: sh
-    run: |
-      echo "Preparing to provision Azure resources..."
-      echo "This will create: Azure OpenAI, Container Apps, Cosmos DB, AI Search"
-
+    run: echo "🚀 Provisioning CA Hackathon accelerator infrastructure..."
+    interactive: false
   postprovision:
     shell: sh
-    run: |
-      echo "Provisioning complete!"
-      echo "Run 'azd deploy' to deploy your application"
-
+    run: echo "✅ Infrastructure provisioned. Run 'azd deploy' to deploy services."
+    interactive: false
   postdeploy:
     shell: sh
     run: |
-      echo "Deployment complete!"
-      echo "Frontend URL: ${AZURE_FRONTEND_URL}"
-      echo "Backend URL: ${AZURE_CONTAINERAPP_URL}"
-      echo "API Health: ${AZURE_CONTAINERAPP_URL}/api/health"
-
-# Pipeline configuration for CI/CD
-pipeline:
-  provider: github
+      echo ""
+      echo "=========================================="
+      echo "🎉 CA Hackathon Deployment Complete!"
+      echo "=========================================="
+      echo "Platform Frontend: ${AZURE_FRONTEND_URL}"
+      echo "Platform Backend:  ${AZURE_CONTAINERAPP_URL}"
+      echo "Backend Health:    ${AZURE_CONTAINERAPP_URL}/api/health"
+      echo "=========================================="
+    interactive: false

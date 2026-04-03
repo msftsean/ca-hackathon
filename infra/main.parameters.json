@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "resourcePrefix": {
-      "value": "frontdoor"
+      "value": "cahack"
     },
     "location": {
       "value": "eastus2"
@@ -19,6 +19,9 @@
     },
     "mockMode": {
       "value": false
+    },
+    "acceleratorIds": {
+      "value": ["001", "002", "003", "004", "005", "006", "007", "008"]
     }
   }
 }

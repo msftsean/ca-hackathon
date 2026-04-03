@@ -1,0 +1,264 @@
+version: '3.8'
+
+networks:
+  cahack-network:
+    driver: bridge
+
+services:
+  # Accelerator 001: BenefitsCal Navigator
+  accel-001-backend:
+    build:
+      context: ./accelerators/001-benefitscal-navigator/backend
+    ports:
+      - "8001:8000"
+    environment:
+      - USE_MOCK_SERVICES=true
+      - AZURE_OPENAI_ENDPOINT=
+      - AZURE_OPENAI_DEPLOYMENT=gpt-4o
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 5s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - cahack-network
+
+  accel-001-frontend:
+    build:
+      context: ./accelerators/001-benefitscal-navigator/frontend
+    ports:
+      - "3001:80"
+    environment:
+      - BACKEND_URL=http://accel-001-backend:8000
+    depends_on:
+      accel-001-backend:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - cahack-network
+
+  # Accelerator 002: Wildfire Response Coordinator
+  accel-002-backend:
+    build:
+      context: ./accelerators/002-wildfire-response-coordinator/backend
+    ports:
+      - "8002:8000"
+    environment:
+      - USE_MOCK_SERVICES=true
+      - AZURE_OPENAI_ENDPOINT=
+      - AZURE_OPENAI_DEPLOYMENT=gpt-4o
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 5s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - cahack-network
+
+  accel-002-frontend:
+    build:
+      context: ./accelerators/002-wildfire-response-coordinator/frontend
+    ports:
+      - "3002:80"
+    environment:
+      - BACKEND_URL=http://accel-002-backend:8000
+    depends_on:
+      accel-002-backend:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - cahack-network
+
+  # Accelerator 003: Medi-Cal Eligibility Agent
+  accel-003-backend:
+    build:
+      context: ./accelerators/003-medi-cal-eligibility/backend
+    ports:
+      - "8003:8000"
+    environment:
+      - USE_MOCK_SERVICES=true
+      - AZURE_OPENAI_ENDPOINT=
+      - AZURE_OPENAI_DEPLOYMENT=gpt-4o
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 5s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - cahack-network
+
+  accel-003-frontend:
+    build:
+      context: ./accelerators/003-medi-cal-eligibility/frontend
+    ports:
+      - "3003:80"
+    environment:
+      - BACKEND_URL=http://accel-003-backend:8000
+    depends_on:
+      accel-003-backend:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - cahack-network
+
+  # Accelerator 004: Permit Streamliner
+  accel-004-backend:
+    build:
+      context: ./accelerators/004-permit-streamliner/backend
+    ports:
+      - "8004:8000"
+    environment:
+      - USE_MOCK_SERVICES=true
+      - AZURE_OPENAI_ENDPOINT=
+      - AZURE_OPENAI_DEPLOYMENT=gpt-4o
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 5s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - cahack-network
+
+  accel-004-frontend:
+    build:
+      context: ./accelerators/004-permit-streamliner/frontend
+    ports:
+      - "3004:80"
+    environment:
+      - BACKEND_URL=http://accel-004-backend:8000
+    depends_on:
+      accel-004-backend:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - cahack-network
+
+  # Accelerator 005: GenAI Procurement Compliance (backend only)
+  accel-005-backend:
+    build:
+      context: ./accelerators/005-genai-procurement-compliance/backend
+    ports:
+      - "8005:8000"
+    environment:
+      - USE_MOCK_SERVICES=true
+      - AZURE_OPENAI_ENDPOINT=
+      - AZURE_OPENAI_DEPLOYMENT=gpt-4o
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 5s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - cahack-network
+
+  # Accelerator 006: Cross-Agency Knowledge Hub
+  accel-006-backend:
+    build:
+      context: ./accelerators/006-cross-agency-knowledge-hub/backend
+    ports:
+      - "8006:8000"
+    environment:
+      - USE_MOCK_SERVICES=true
+      - AZURE_OPENAI_ENDPOINT=
+      - AZURE_OPENAI_DEPLOYMENT=gpt-4o
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 5s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - cahack-network
+
+  accel-006-frontend:
+    build:
+      context: ./accelerators/006-cross-agency-knowledge-hub/frontend
+    ports:
+      - "3006:80"
+    environment:
+      - BACKEND_URL=http://accel-006-backend:8000
+    depends_on:
+      accel-006-backend:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - cahack-network
+
+  # Accelerator 007: EDD Claims Assistant
+  accel-007-backend:
+    build:
+      context: ./accelerators/007-edd-claims-assistant/backend
+    ports:
+      - "8007:8000"
+    environment:
+      - USE_MOCK_SERVICES=true
+      - AZURE_OPENAI_ENDPOINT=
+      - AZURE_OPENAI_DEPLOYMENT=gpt-4o
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 5s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - cahack-network
+
+  accel-007-frontend:
+    build:
+      context: ./accelerators/007-edd-claims-assistant/frontend
+    ports:
+      - "3007:80"
+    environment:
+      - BACKEND_URL=http://accel-007-backend:8000
+    depends_on:
+      accel-007-backend:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - cahack-network
+
+  # Accelerator 008: Multilingual Emergency Chatbot
+  accel-008-backend:
+    build:
+      context: ./accelerators/008-multilingual-emergency-chat/backend
+    ports:
+      - "8008:8000"
+    environment:
+      - USE_MOCK_SERVICES=true
+      - AZURE_OPENAI_ENDPOINT=
+      - AZURE_OPENAI_DEPLOYMENT=gpt-4o
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 5s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - cahack-network
+
+  accel-008-frontend:
+    build:
+      context: ./accelerators/008-multilingual-emergency-chat/frontend
+    ports:
+      - "3008:80"
+    environment:
+      - BACKEND_URL=http://accel-008-backend:8000
+    depends_on:
+      accel-008-backend:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - cahack-network
