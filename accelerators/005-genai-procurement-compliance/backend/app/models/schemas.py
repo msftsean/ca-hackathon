@@ -1,44 +1,98 @@
 """Pydantic v2 models for GenAI Procurement Compliance."""
 
 from datetime import datetime
+from typing import Literal
+
 from pydantic import BaseModel, Field
+
+
+class ChatRequest(BaseModel):
+    message: str
+    session_id: str | None = None
+    document_id: str | None = None
+
+
+class Citation(BaseModel):
+    source: str
+    text: str
+    regulation: str | None = None
 
 
 class ComplianceQuery(BaseModel):
     raw_input: str
-    intent: str = "compliance_review"
-    attestation_id: str | None = None
-    vendor_name: str | None = None
-    frameworks: list[str] = Field(default_factory=lambda: ["eo-n-5-26", "sb-53"])
+    intent: str = "compliance_check"
+    entities: dict = Field(default_factory=dict)
 
 
-class FrameworkScore(BaseModel):
-    framework_id: str
-    framework_name: str
-    score: float  # 0.0 to 1.0
-    max_score: float = 1.0
-    findings: list[str] = Field(default_factory=list)
-    remediation: list[str] = Field(default_factory=list)
-    status: str = "reviewed"  # reviewed, passed, failed, needs_remediation
-
-
-class VendorAttestation(BaseModel):
-    attestation_id: str
+class AttestationDocument(BaseModel):
+    doc_id: str
     vendor_name: str
-    product_name: str
-    submission_date: datetime | None = None
-    ai_model_disclosed: bool = False
-    training_data_disclosed: bool = False
-    bias_testing_completed: bool = False
-    security_assessment_completed: bool = False
-    data_handling_policy: str | None = None
+    upload_date: datetime | None = None
+    file_type: str = "pdf"
+    status: Literal["pending", "analyzing", "complete", "error"] = "pending"
 
 
-class ComplianceReport(BaseModel):
-    attestation_id: str
-    vendor_name: str
-    overall_score: float
-    risk_level: str  # low, medium, high, critical
-    framework_scores: list[FrameworkScore] = Field(default_factory=list)
-    recommendation: str
-    reviewed_at: datetime | None = None
+class ComplianceRule(BaseModel):
+    rule_id: str
+    category: str
+    requirement: str
+    regulation_source: Literal["EO_N-5-26", "SB_53", "NIST_AI_RMF"]
+    severity: Literal["critical", "high", "medium", "low"]
+
+
+class ComplianceResult(BaseModel):
+    rule_id: str
+    status: Literal["compliant", "non_compliant", "partial", "not_assessed"]
+    evidence: str
+    confidence: float = 0.0
+    findings: str = ""
+
+
+class ComplianceScore(BaseModel):
+    overall_score: float = Field(ge=0, le=100)
+    category_scores: dict[str, float] = Field(default_factory=dict)
+    risk_classification: Literal["low", "medium", "high", "critical"] = "medium"
+    compliant_count: int = 0
+    non_compliant_count: int = 0
+    partial_count: int = 0
+
+
+class ComplianceGap(BaseModel):
+    rule_id: str
+    category: str
+    requirement: str
+    severity: Literal["critical", "high", "medium", "low"]
+    remediation_guidance: str
+    estimated_effort: Literal["low", "medium", "high"]
+
+
+class GapAnalysis(BaseModel):
+    gaps: list[ComplianceGap] = Field(default_factory=list)
+
+
+class RiskClassification(BaseModel):
+    tier: int = Field(ge=1, le=4)
+    classification: str
+    justification: str
+
+
+class AgentResponse(BaseModel):
+    intent: str
+    response_text: str
+    confidence: float = 0.0
+    citations: list[Citation] = Field(default_factory=list)
+    data: dict | None = None
+
+
+class RoutingDecision(BaseModel):
+    department: str
+    priority: Literal["low", "medium", "high", "critical"]
+    reason: str
+    escalate: bool = False
+
+
+class ChatResponse(BaseModel):
+    response: str
+    confidence: float = 0.0
+    citations: list[Citation] = Field(default_factory=list)
+    compliance_data: dict | None = None

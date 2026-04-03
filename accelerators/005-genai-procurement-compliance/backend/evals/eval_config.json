@@ -1,0 +1,79 @@
+{
+  "eval_name": "genai-procurement-compliance-accuracy",
+  "version": "1.0",
+  "description": "Accuracy evaluation for 005 GenAI Procurement Compliance Checker",
+  "test_cases": [
+    {
+      "id": "TC-001",
+      "message": "Check the compliance score for this vendor attestation",
+      "expected_intent": "compliance_check",
+      "min_confidence": 0.85
+    },
+    {
+      "id": "TC-002",
+      "message": "What compliance gaps exist in the submission?",
+      "expected_intent": "gap_analysis",
+      "min_confidence": 0.80
+    },
+    {
+      "id": "TC-003",
+      "message": "Upload a new vendor attestation document",
+      "expected_intent": "attestation_upload",
+      "min_confidence": 0.90
+    },
+    {
+      "id": "TC-004",
+      "message": "What is the risk tier for this vendor?",
+      "expected_intent": "risk_assessment",
+      "min_confidence": 0.85
+    },
+    {
+      "id": "TC-005",
+      "message": "What does EO N-5-26 require for AI vendors?",
+      "expected_intent": "regulation_lookup",
+      "min_confidence": 0.80
+    },
+    {
+      "id": "TC-006",
+      "message": "Compare all vendor compliance scores",
+      "expected_intent": "vendor_comparison",
+      "min_confidence": 0.80
+    },
+    {
+      "id": "TC-007",
+      "message": "Is this vendor compliant with SB 53?",
+      "expected_intent": "compliance_check",
+      "min_confidence": 0.80
+    },
+    {
+      "id": "TC-008",
+      "message": "What remediation steps are needed?",
+      "expected_intent": "gap_analysis",
+      "min_confidence": 0.75
+    },
+    {
+      "id": "TC-009",
+      "message": "Classify the risk level of this AI system",
+      "expected_intent": "risk_assessment",
+      "min_confidence": 0.85
+    },
+    {
+      "id": "TC-010",
+      "message": "What are the NIST AI RMF requirements?",
+      "expected_intent": "regulation_lookup",
+      "min_confidence": 0.80
+    },
+    {
+      "id": "TC-011",
+      "message": "What is the weather today?",
+      "expected_intent": "general_info",
+      "min_confidence": 0.0
+    },
+    {
+      "id": "TC-012",
+      "message": "hello",
+      "expected_intent": "general_info",
+      "min_confidence": 0.0
+    }
+  ]
+}
