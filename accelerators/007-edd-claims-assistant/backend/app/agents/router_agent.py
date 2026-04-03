@@ -1,27 +1,55 @@
-"""RouterAgent — Routes to UI, DI, or PFL claim processing."""
+"""RouterAgent — Routes queries to the appropriate EDD service."""
 
-from app.models.schemas import ClaimQuery
+from app.models.schemas import ClaimQuery, RoutingDecision
+
+
+INTENT_TO_DEPARTMENT: dict[str, str] = {
+    "claim_status": "claims_services",
+    "eligibility_check": "eligibility",
+    "filing_help": "filing_assistance",
+    "document_requirements": "document_processing",
+    "payment_info": "payments",
+    "appeal_info": "appeals",
+    "general_info": "general_support",
+}
+
+INTENT_TO_PRIORITY: dict[str, str] = {
+    "claim_status": "medium",
+    "eligibility_check": "medium",
+    "filing_help": "high",
+    "document_requirements": "medium",
+    "payment_info": "medium",
+    "appeal_info": "high",
+    "general_info": "low",
+}
+
+ESCALATION_KEYWORDS = [
+    "appeal", "frustrated", "angry", "desperate", "unfair",
+    "complaint", "sue", "lawyer", "attorney",
+    "emergency", "homeless", "hungry",
+]
 
 
 class RouterAgent:
-    """Routes claim queries to the appropriate EDD program module."""
+    """Routes EDD queries to the appropriate service department."""
 
-    PROGRAM_MAP = {
-        "unemployment": "ui",
-        "laid off": "ui",
-        "lost job": "ui",
-        "disability": "di",
-        "injured": "di",
-        "medical": "di",
-        "family leave": "pfl",
-        "parental": "pfl",
-        "bonding": "pfl",
-    }
+    def _should_escalate(self, query: ClaimQuery) -> bool:
+        lower = query.raw_input.lower()
+        if query.entities.get("pii_detected"):
+            return True
+        return any(kw in lower for kw in ESCALATION_KEYWORDS)
 
-    async def route(self, query: ClaimQuery) -> str:
-        if query.program:
-            return query.program
-        for keyword, program in self.PROGRAM_MAP.items():
-            if keyword in query.raw_input.lower():
-                return program
-        return "ui"
+    async def route(self, query: ClaimQuery) -> RoutingDecision:
+        department = INTENT_TO_DEPARTMENT.get(query.intent, "general_support")
+        priority = INTENT_TO_PRIORITY.get(query.intent, "low")
+        escalate = self._should_escalate(query)
+
+        if escalate:
+            priority = "critical"
+
+        return RoutingDecision(
+            department=department,
+            priority=priority,
+            reason=f"Intent '{query.intent}' routed to {department}",
+            escalate=escalate,
+        )

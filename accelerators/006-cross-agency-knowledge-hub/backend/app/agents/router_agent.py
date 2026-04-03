@@ -1,21 +1,50 @@
-"""RouterAgent — Routes queries to appropriate agency knowledge bases."""
+"""RouterAgent — Routes queries to the appropriate service."""
 
-from app.models.schemas import KnowledgeQuery
+from app.models.schemas import SearchQuery, RoutingDecision
+
+
+INTENT_TO_DEPARTMENT: dict[str, str] = {
+    "policy_search": "search_index",
+    "document_lookup": "search_index",
+    "expert_search": "expert_directory",
+    "cross_reference": "cross_reference_engine",
+    "agency_info": "agency_directory",
+    "general_info": "search_index",
+}
+
+INTENT_TO_PRIORITY: dict[str, str] = {
+    "policy_search": "high",
+    "document_lookup": "medium",
+    "expert_search": "medium",
+    "cross_reference": "high",
+    "agency_info": "low",
+    "general_info": "low",
+}
+
+ESCALATION_KEYWORDS = [
+    "confidential", "restricted", "classified", "sensitive",
+    "urgent", "emergency", "critical", "security",
+]
 
 
 class RouterAgent:
-    """Routes search queries to one or more agency knowledge bases."""
+    """Routes knowledge queries to the appropriate service."""
 
-    AGENCY_INDICES = {
-        "cdt": "index-cdt-policies",
-        "dgs": "index-dgs-procurement",
-        "calhr": "index-calhr-hr",
-        "govops": "index-govops-general",
-        "all": "index-federated",
-    }
+    def _should_escalate(self, query: SearchQuery) -> bool:
+        lower = query.raw_input.lower()
+        return any(kw in lower for kw in ESCALATION_KEYWORDS)
 
-    async def route(self, query: KnowledgeQuery) -> list[str]:
-        scope = query.agency_scope or "all"
-        if scope == "all":
-            return list(self.AGENCY_INDICES.values())
-        return [self.AGENCY_INDICES.get(scope, "index-federated")]
+    async def route(self, query: SearchQuery) -> RoutingDecision:
+        department = INTENT_TO_DEPARTMENT.get(query.intent, "search_index")
+        priority = INTENT_TO_PRIORITY.get(query.intent, "low")
+        escalate = self._should_escalate(query)
+
+        if escalate:
+            priority = "critical"
+
+        return RoutingDecision(
+            department=department,
+            priority=priority,
+            reason=f"Intent '{query.intent}' routed to {department}",
+            escalate=escalate,
+        )

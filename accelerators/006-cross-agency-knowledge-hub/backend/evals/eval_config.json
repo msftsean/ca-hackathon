@@ -1,0 +1,86 @@
+{
+  "accelerator": "006-cross-agency-knowledge-hub",
+  "version": "1.0.0",
+  "test_cases": [
+    {
+      "id": "eval-006-001",
+      "input": "Find CDSS policy on CalFresh",
+      "expected_intent": "policy_search",
+      "expected_agencies": ["CDSS"],
+      "expected_min_confidence": 0.7,
+      "expected_has_documents": true
+    },
+    {
+      "id": "eval-006-002",
+      "input": "Who is the expert on procurement?",
+      "expected_intent": "expert_search",
+      "expected_min_confidence": 0.7,
+      "expected_has_experts": true
+    },
+    {
+      "id": "eval-006-003",
+      "input": "What documents supersede or cross-reference this policy?",
+      "expected_intent": "cross_reference",
+      "expected_min_confidence": 0.5
+    },
+    {
+      "id": "eval-006-004",
+      "input": "Search across all agencies for data governance",
+      "expected_intent": "policy_search",
+      "expected_min_confidence": 0.5
+    },
+    {
+      "id": "eval-006-005",
+      "input": "Find CalHR telework regulation",
+      "expected_intent": "policy_search",
+      "expected_agencies": ["CalHR"],
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "eval-006-006",
+      "input": "Show me DHCS Medi-Cal managed care policy",
+      "expected_intent": "document_lookup",
+      "expected_agencies": ["DHCS"],
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "eval-006-007",
+      "input": "What agencies are available in the knowledge hub?",
+      "expected_intent": "agency_info",
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "eval-006-008",
+      "input": "Find the Caltrans highway maintenance procedure",
+      "expected_intent": "policy_search",
+      "expected_agencies": ["Caltrans"],
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "eval-006-009",
+      "input": "Who handles environmental review at Caltrans?",
+      "expected_intent": "expert_search",
+      "expected_agencies": ["Caltrans"],
+      "expected_min_confidence": 0.5
+    },
+    {
+      "id": "eval-006-010",
+      "input": "Search EDD unemployment insurance claims procedures",
+      "expected_intent": "policy_search",
+      "expected_agencies": ["EDD"],
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "eval-006-011",
+      "input": "Find guidance on telehealth services for Medi-Cal",
+      "expected_intent": "policy_search",
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "eval-006-012",
+      "input": "Hello, help me get started",
+      "expected_intent": "general_info",
+      "expected_min_confidence": 0.3
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "accelerator": "007-edd-claims-assistant",
+  "version": "1.0.0",
+  "test_cases": [
+    {
+      "id": "eval-007-001",
+      "input": "Check my unemployment claim status",
+      "expected_intent": "claim_status",
+      "expected_claim_type": "UI",
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "eval-007-002",
+      "input": "Am I eligible for disability insurance?",
+      "expected_intent": "eligibility_check",
+      "expected_claim_type": "DI",
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "eval-007-003",
+      "input": "How do I file a new unemployment claim?",
+      "expected_intent": "filing_help",
+      "expected_claim_type": "UI",
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "eval-007-004",
+      "input": "What documents do I need to submit for my DI claim?",
+      "expected_intent": "document_requirements",
+      "expected_claim_type": "DI",
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "eval-007-005",
+      "input": "When will I get my next payment?",
+      "expected_intent": "payment_info",
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "eval-007-006",
+      "input": "My claim was denied, how do I appeal?",
+      "expected_intent": "appeal_info",
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "eval-007-007",
+      "input": "I need paid family leave for bonding with my new baby",
+      "expected_intent": "filing_help",
+      "expected_claim_type": "PFL",
+      "expected_min_confidence": 0.5
+    },
+    {
+      "id": "eval-007-008",
+      "input": "Can I qualify for unemployment if I was laid off?",
+      "expected_intent": "eligibility_check",
+      "expected_claim_type": "UI",
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "eval-007-009",
+      "input": "Where is my direct deposit payment?",
+      "expected_intent": "payment_info",
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "eval-007-010",
+      "input": "I need to upload proof of identity for my claim",
+      "expected_intent": "document_requirements",
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "eval-007-011",
+      "input": "I am frustrated and angry about my denied claim",
+      "expected_intent": "appeal_info",
+      "expected_escalation": true,
+      "expected_min_confidence": 0.5
+    },
+    {
+      "id": "eval-007-012",
+      "input": "How much is the weekly benefit amount for UI?",
+      "expected_intent": "payment_info",
+      "expected_claim_type": "UI",
+      "expected_min_confidence": 0.5
+    },
+    {
+      "id": "eval-007-013",
+      "input": "Hello, what can you help with?",
+      "expected_intent": "general_info",
+      "expected_min_confidence": 0.3
+    },
+    {
+      "id": "eval-007-014",
+      "input": "I was injured at work and need disability benefits",
+      "expected_intent": "eligibility_check",
+      "expected_claim_type": "DI",
+      "expected_min_confidence": 0.5
+    },
+    {
+      "id": "eval-007-015",
+      "input": "Check my certification status and pending issues",
+      "expected_intent": "claim_status",
+      "expected_min_confidence": 0.7
+    }
+  ]
+}

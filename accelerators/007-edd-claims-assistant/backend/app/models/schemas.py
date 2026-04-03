@@ -1,43 +1,96 @@
 """Pydantic v2 models for EDD Claims Assistant."""
 
-from datetime import date
+from datetime import datetime
 from pydantic import BaseModel, Field
+
+
+class Citation(BaseModel):
+    source: str
+    text: str
+    policy_ref: str | None = None
 
 
 class ClaimQuery(BaseModel):
     raw_input: str
-    intent: str = "status_check"
-    claim_id: str | None = None
-    program: str | None = None  # ui, di, pfl
-    pii_detected: bool = False
+    intent: str
+    claim_type: str | None = None  # UI/DI/PFL
+    entities: dict = Field(default_factory=dict)
 
 
 class ClaimStatus(BaseModel):
     claim_id: str
-    program: str  # ui, di, pfl
-    status: str  # pending, approved, denied, in_review, paid
-    claimant_name: str | None = None
-    filed_date: date | None = None
-    weekly_benefit_amount: float | None = None
-    last_payment_date: date | None = None
-    next_certification_date: date | None = None
-    notes: list[str] = Field(default_factory=list)
+    claim_type: str
+    status: str  # active/pending/denied/exhausted/on_hold
+    filed_date: datetime
+    last_certified: datetime | None = None
+    weekly_benefit_amount: float
+    remaining_balance: float
+    pending_issues: list[str] = Field(default_factory=list)
+    next_payment_date: datetime | None = None
 
 
-class EligibilityScreening(BaseModel):
-    program: str
+class EligibilityAssessment(BaseModel):
+    claim_type: str
     likely_eligible: bool
-    reason: str
+    confidence: float
+    factors: list[str] = Field(default_factory=list)
     requirements: list[str] = Field(default_factory=list)
     next_steps: list[str] = Field(default_factory=list)
-    confidence: float = 0.0
+
+
+class DocumentItem(BaseModel):
+    name: str
+    required: bool
+    submitted: bool
+    description: str
+
+
+class IdentityVerification(BaseModel):
+    last_four_ssn: str
+    date_of_birth: str
+    verified: bool
+
+
+class PolicyArticle(BaseModel):
+    article_id: str
+    title: str
+    content: str
+    claim_types: list[str] = Field(default_factory=list)
+    last_updated: datetime
 
 
 class SupportTicket(BaseModel):
     ticket_id: str
-    claim_id: str | None = None
-    category: str
-    description: str
-    priority: str = "normal"  # low, normal, high, urgent
-    status: str = "open"
-    created_at: date | None = None
+    reason: str
+    priority: str
+    claim_type: str | None = None
+
+
+class ChatRequest(BaseModel):
+    message: str
+    language: str = "en"
+    session_id: str | None = None
+
+
+class ChatResponse(BaseModel):
+    response: str
+    confidence: float
+    citations: list[Citation] = Field(default_factory=list)
+    claim_status: ClaimStatus | None = None
+    eligibility: EligibilityAssessment | None = None
+    document_checklist: list[DocumentItem] | None = None
+
+
+class AgentResponse(BaseModel):
+    intent: str
+    response_text: str
+    confidence: float
+    citations: list[Citation] = Field(default_factory=list)
+    data: dict | None = None
+
+
+class RoutingDecision(BaseModel):
+    department: str
+    priority: str
+    reason: str
+    escalate: bool = False
