@@ -1,0 +1,91 @@
+{
+  "name": "permit-streamliner-evals",
+  "version": "0.1.0",
+  "description": "Evaluation test cases for Permit Streamliner",
+  "test_cases": [
+    {
+      "id": "TC-001",
+      "input": "I want to build an addition to my house",
+      "expected_intent": "project_intake",
+      "expected_project_type": "addition",
+      "expected_min_confidence": 0.8
+    },
+    {
+      "id": "TC-002",
+      "input": "What documents do I need for a renovation permit?",
+      "expected_intent": "requirement_check",
+      "expected_project_type": "renovation",
+      "expected_min_confidence": 0.8
+    },
+    {
+      "id": "TC-003",
+      "input": "What is the zoning for 123 Main St?",
+      "expected_intent": "zoning_check",
+      "expected_project_type": null,
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "TC-004",
+      "input": "What is the status of my application?",
+      "expected_intent": "status_check",
+      "expected_project_type": null,
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "TC-005",
+      "input": "How much does a building permit cost?",
+      "expected_intent": "fee_estimate",
+      "expected_project_type": null,
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "TC-006",
+      "input": "I want to build an ADU in my backyard",
+      "expected_intent": "project_intake",
+      "expected_project_type": "adu",
+      "expected_min_confidence": 0.8
+    },
+    {
+      "id": "TC-007",
+      "input": "Can I build a commercial restaurant at 789 Broadway?",
+      "expected_intent": "project_intake",
+      "expected_project_type": "commercial",
+      "expected_min_confidence": 0.8
+    },
+    {
+      "id": "TC-008",
+      "input": "I need to demolish an old structure",
+      "expected_intent": "project_intake",
+      "expected_project_type": "demolition",
+      "expected_min_confidence": 0.8
+    },
+    {
+      "id": "TC-009",
+      "input": "What are the setback requirements for my zone?",
+      "expected_intent": "zoning_check",
+      "expected_project_type": null,
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "TC-010",
+      "input": "What is the fee estimate for new construction?",
+      "expected_intent": "fee_estimate",
+      "expected_project_type": "new_construction",
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "TC-011",
+      "input": "I need a checklist for my renovation project",
+      "expected_intent": "requirement_check",
+      "expected_project_type": "renovation",
+      "expected_min_confidence": 0.7
+    },
+    {
+      "id": "TC-012",
+      "input": "Where is my permit application in the process?",
+      "expected_intent": "status_check",
+      "expected_project_type": null,
+      "expected_min_confidence": 0.7
+    }
+  ]
+}

@@ -1,42 +1,101 @@
 """Pydantic v2 models for Permit Streamliner."""
 
-from datetime import date, datetime
+from datetime import datetime
 from pydantic import BaseModel, Field
+
+
+class Citation(BaseModel):
+    source: str
+    text: str
+    policy_ref: str | None = None
+    url: str | None = None
+
+
+class ChatRequest(BaseModel):
+    message: str
+    language: str = "en"
+    session_id: str | None = None
+
+
+class ChatResponse(BaseModel):
+    response: str
+    confidence: float
+    citations: list[Citation] = Field(default_factory=list)
+    data: dict | None = None
 
 
 class PermitQuery(BaseModel):
     raw_input: str
-    intent: str = "permit_inquiry"
-    permit_type: str | None = None
-    jurisdiction: str | None = None
+    intent: str
     entities: dict = Field(default_factory=dict)
-
-
-class ChecklistItem(BaseModel):
-    item_id: str
-    description: str
-    required: bool = True
-    completed: bool = False
-    document_type: str | None = None
+    project_type: str | None = None
+    address: str | None = None
 
 
 class PermitApplication(BaseModel):
-    permit_id: str
-    permit_type: str  # residential, commercial, adu, solar, demolition
+    app_id: str
     applicant_name: str
-    jurisdiction: str  # opr, hcd, dca
-    status: str = "intake"  # intake, review, approved, denied, revision_needed
-    submitted_date: date | None = None
-    sla_deadline: date | None = None
-    sla_days_remaining: int | None = None
-    checklist: list[ChecklistItem] = Field(default_factory=list)
-    notes: list[str] = Field(default_factory=list)
+    project_type: str
+    project_description: str
+    address: str
+    status: str = "draft"  # draft/submitted/under_review/approved/denied/revision_needed
+    submitted_at: datetime | None = None
+    estimated_completion: datetime | None = None
 
 
-class SLATracking(BaseModel):
-    permit_id: str
-    sla_start: datetime
-    sla_target_days: int = 30
-    days_elapsed: int = 0
-    on_track: bool = True
-    blockers: list[str] = Field(default_factory=list)
+class PermitRequirement(BaseModel):
+    req_id: str
+    name: str
+    description: str
+    category: str  # building/electrical/plumbing/zoning/fire/environmental/health
+    required: bool = True
+    document_type: str = ""
+
+
+class ChecklistItem(BaseModel):
+    name: str
+    required: bool = True
+    submitted: bool = False
+    status: str = "pending"  # pending/approved/rejected
+
+
+class DocumentChecklist(BaseModel):
+    items: list[ChecklistItem] = Field(default_factory=list)
+
+
+class ZoningResult(BaseModel):
+    address: str
+    zone_code: str
+    zone_name: str
+    permitted_uses: list[str] = Field(default_factory=list)
+    conditional_uses: list[str] = Field(default_factory=list)
+    setbacks: dict = Field(default_factory=dict)
+    max_height_ft: float = 35.0
+    lot_coverage_pct: float = 50.0
+    compliant: bool = True
+    issues: list[str] = Field(default_factory=list)
+
+
+class RoutingDecision(BaseModel):
+    departments: list[str] = Field(default_factory=list)
+    priority: str = "medium"  # low/medium/high/critical
+    reason: str = ""
+    escalate: bool = False
+    sla_days: int = 30
+
+
+class SLAStatus(BaseModel):
+    application_id: str
+    department: str
+    assigned_date: datetime
+    due_date: datetime
+    status: str = "on_track"  # on_track/at_risk/breached
+    days_remaining: int = 30
+
+
+class AgentResponse(BaseModel):
+    intent: str
+    response_text: str
+    confidence: float
+    citations: list[Citation] = Field(default_factory=list)
+    data: dict | None = None

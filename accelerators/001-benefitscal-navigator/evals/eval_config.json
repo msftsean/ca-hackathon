@@ -1,0 +1,127 @@
+{
+  "name": "benefitscal-navigator-evals",
+  "version": "0.1.0",
+  "description": "Evaluation test cases for BenefitsCal Navigator",
+  "test_cases": [
+    {
+      "id": "TC-001",
+      "input": "Am I eligible for CalFresh?",
+      "expected_intent": "eligibility_check",
+      "expected_program": "calfresh",
+      "expected_min_confidence": 0.8,
+      "expected_has_citations": true
+    },
+    {
+      "id": "TC-002",
+      "input": "How do I apply for CalWORKs?",
+      "expected_intent": "application_help",
+      "expected_program": "calworks",
+      "expected_min_confidence": 0.8,
+      "expected_has_citations": true
+    },
+    {
+      "id": "TC-003",
+      "input": "What documents do I need for CalFresh?",
+      "expected_intent": "document_requirements",
+      "expected_program": "calfresh",
+      "expected_min_confidence": 0.8,
+      "expected_has_citations": true
+    },
+    {
+      "id": "TC-004",
+      "input": "Where is the nearest office in Los Angeles?",
+      "expected_intent": "office_locations",
+      "expected_program": null,
+      "expected_min_confidence": 0.7,
+      "expected_has_citations": true
+    },
+    {
+      "id": "TC-005",
+      "input": "Check my application status",
+      "expected_intent": "status_check",
+      "expected_program": null,
+      "expected_min_confidence": 0.7,
+      "expected_has_citations": true
+    },
+    {
+      "id": "TC-006",
+      "input": "What is CalWORKs?",
+      "expected_intent": "program_info",
+      "expected_program": "calworks",
+      "expected_min_confidence": 0.8,
+      "expected_has_citations": true
+    },
+    {
+      "id": "TC-007",
+      "input": "Tell me about general relief",
+      "expected_intent": "program_info",
+      "expected_program": "general_relief",
+      "expected_min_confidence": 0.8,
+      "expected_has_citations": true
+    },
+    {
+      "id": "TC-008",
+      "input": "Do I qualify for CAPI benefits?",
+      "expected_intent": "eligibility_check",
+      "expected_program": "capi",
+      "expected_min_confidence": 0.8,
+      "expected_has_citations": true
+    },
+    {
+      "id": "TC-009",
+      "input": "I need help with benefits",
+      "expected_intent": "general_info",
+      "expected_program": null,
+      "expected_min_confidence": 0.3,
+      "expected_has_citations": true
+    },
+    {
+      "id": "TC-010",
+      "input": "How do I enroll in food stamps?",
+      "expected_intent": "application_help",
+      "expected_program": "calfresh",
+      "expected_min_confidence": 0.8,
+      "expected_has_citations": true
+    },
+    {
+      "id": "TC-011",
+      "input": "What proof do I need to bring to my interview?",
+      "expected_intent": "document_requirements",
+      "expected_program": null,
+      "expected_min_confidence": 0.7,
+      "expected_has_citations": true
+    },
+    {
+      "id": "TC-012",
+      "input": "Where is the Sacramento county office?",
+      "expected_intent": "office_locations",
+      "expected_program": null,
+      "expected_min_confidence": 0.7,
+      "expected_has_citations": true
+    },
+    {
+      "id": "TC-013",
+      "input": "Explain how CalFresh works",
+      "expected_intent": "program_info",
+      "expected_program": "calfresh",
+      "expected_min_confidence": 0.8,
+      "expected_has_citations": true
+    },
+    {
+      "id": "TC-014",
+      "input": "Can I get cash aid for my family?",
+      "expected_intent": "eligibility_check",
+      "expected_program": "calworks",
+      "expected_min_confidence": 0.8,
+      "expected_has_citations": true
+    },
+    {
+      "id": "TC-015",
+      "input": "Was my CalFresh application approved or denied?",
+      "expected_intent": "status_check",
+      "expected_program": "calfresh",
+      "expected_min_confidence": 0.7,
+      "expected_has_citations": true
+    }
+  ]
+}
