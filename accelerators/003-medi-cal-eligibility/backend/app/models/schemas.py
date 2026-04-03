@@ -1,46 +1,94 @@
 """Pydantic v2 models for Medi-Cal Eligibility Agent."""
 
-from datetime import date
+from datetime import datetime
 from pydantic import BaseModel, Field
 
 
-class EligibilityQuery(BaseModel):
+# --- Request / Response ---
+
+class ChatRequest(BaseModel):
+    message: str
+    language: str = "en"
+    session_id: str | None = None
+    application_id: str | None = None
+
+
+class Citation(BaseModel):
+    source: str
+    text: str
+    regulation_ref: str | None = None
+
+
+class EligibilityScreening(BaseModel):
+    program_type: str  # MAGI_Adult, MAGI_Child, ABD, QMB, SLMB, Pregnancy
+    likely_eligible: bool
+    confidence: float
+    income_limit: float
+    fpl_percentage: float
+    factors: list[str] = Field(default_factory=list)
+    required_documents: list[str] = Field(default_factory=list)
+    next_steps: list[str] = Field(default_factory=list)
+
+
+class ApplicationStatus(BaseModel):
+    app_id: str
+    status: str
+    last_updated: datetime
+    next_action: str | None = None
+
+
+class ChatResponse(BaseModel):
+    response: str
+    confidence: float
+    citations: list[Citation] = Field(default_factory=list)
+    eligibility: EligibilityScreening | None = None
+    application: ApplicationStatus | None = None
+
+
+# --- Internal Agent Models ---
+
+class MediCalQuery(BaseModel):
     raw_input: str
-    intent: str = "eligibility_check"
-    document_ids: list[str] = Field(default_factory=list)
-    applicant_info: dict = Field(default_factory=dict)
-    pii_detected: bool = False
+    intent: str = "general_info"
+    entities: dict = Field(default_factory=dict)
+    program_type: str | None = None
 
 
-class IncomeRecord(BaseModel):
-    source: str  # employment, self-employment, social-security, etc.
-    document_type: str  # w2, pay_stub, tax_return, ssi_statement
-    gross_amount: float
-    period: str  # monthly, annual
-    employer: str | None = None
-    verified: bool = False
-    extracted_at: date | None = None
-
-
-class MediCalApplication(BaseModel):
-    application_id: str
+class ApplicationInfo(BaseModel):
+    app_id: str
     applicant_name: str
     household_size: int
+    monthly_income: float
     county: str
-    income_records: list[IncomeRecord] = Field(default_factory=list)
-    total_monthly_income: float = 0.0
-    application_date: date | None = None
-    status: str = "pending"
+    status: str = "draft"  # draft/submitted/pending_verification/approved/denied/pending_documents
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    program_type: str = "MAGI_Adult"
 
 
-class EligibilityDetermination(BaseModel):
-    application_id: str
-    eligible: bool
-    program: str  # medi-cal, medi-cal-expansion, covered-california
-    magi_income: float
-    fpl_percentage: float
-    income_limit: float
-    household_size: int
-    determination_reason: str
-    next_steps: list[str] = Field(default_factory=list)
+class DocumentInfo(BaseModel):
+    doc_id: str
+    doc_type: str  # W2, paystub, form_1040, SSA_1099, bank_statement
+    upload_status: str = "pending"  # pending/uploaded/verified/rejected
+    extracted_data: dict | None = None
+
+
+class IncomeVerification(BaseModel):
+    source: str
+    amount: float
+    frequency: str = "monthly"  # monthly/annual/biweekly
+    verified: bool = False
+
+
+class RoutingDecision(BaseModel):
+    destination: str
+    priority: str = "medium"
+    escalate: bool = False
+    escalation_reason: str | None = None
+
+
+class AgentResponse(BaseModel):
+    response: str
     confidence: float = 0.0
+    citations: list[Citation] = Field(default_factory=list)
+    eligibility: EligibilityScreening | None = None
+    application: ApplicationStatus | None = None

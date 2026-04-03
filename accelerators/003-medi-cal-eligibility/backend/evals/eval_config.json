@@ -1,0 +1,102 @@
+{
+  "accelerator": "003-medi-cal-eligibility",
+  "version": "0.1.0",
+  "test_cases": [
+    {
+      "id": "eval-001",
+      "input": "I make $1,000 per month and live alone. Am I eligible for Medi-Cal?",
+      "expected_intent": "eligibility_check",
+      "expected_eligible": true,
+      "expected_program": "MAGI_Adult"
+    },
+    {
+      "id": "eval-002",
+      "input": "My family of 4 earns $5,000 monthly. Do we qualify?",
+      "expected_intent": "eligibility_check",
+      "expected_eligible": false,
+      "expected_program": "MAGI_Adult"
+    },
+    {
+      "id": "eval-003",
+      "input": "Can my children get Medi-Cal? We make $2,500/month, household of 3.",
+      "expected_intent": "eligibility_check",
+      "expected_eligible": true,
+      "expected_program": "MAGI_Child"
+    },
+    {
+      "id": "eval-004",
+      "input": "I am pregnant and make $2,000/month. Am I eligible?",
+      "expected_intent": "eligibility_check",
+      "expected_eligible": true,
+      "expected_program": "Pregnancy"
+    },
+    {
+      "id": "eval-005",
+      "input": "What is the status of my application MC-2025-00001?",
+      "expected_intent": "application_status",
+      "expected_route": "application_processing"
+    },
+    {
+      "id": "eval-006",
+      "input": "What documents do I need to submit for my Medi-Cal application?",
+      "expected_intent": "document_help",
+      "expected_route": "document_verification"
+    },
+    {
+      "id": "eval-007",
+      "input": "I earn $3,500 per month in wages. What is my FPL percentage?",
+      "expected_intent": "income_verification",
+      "expected_route": "income_review"
+    },
+    {
+      "id": "eval-008",
+      "input": "Where is the Medi-Cal office in Los Angeles?",
+      "expected_intent": "county_info",
+      "expected_route": "county_services"
+    },
+    {
+      "id": "eval-009",
+      "input": "What types of Medi-Cal programs are available?",
+      "expected_intent": "program_info",
+      "expected_route": "eligibility_screening"
+    },
+    {
+      "id": "eval-010",
+      "input": "I have a disability and need medical coverage",
+      "expected_intent": "eligibility_check",
+      "expected_program": "ABD",
+      "expected_escalation": true
+    },
+    {
+      "id": "eval-011",
+      "input": "I make $800 per month with a household of 2. Do we qualify?",
+      "expected_intent": "eligibility_check",
+      "expected_eligible": true,
+      "expected_program": "MAGI_Adult"
+    },
+    {
+      "id": "eval-012",
+      "input": "What is the difference between MAGI and ABD Medi-Cal?",
+      "expected_intent": "program_info",
+      "expected_route": "eligibility_screening"
+    },
+    {
+      "id": "eval-013",
+      "input": "I need to upload my W2 form for verification",
+      "expected_intent": "document_help",
+      "expected_route": "document_verification"
+    },
+    {
+      "id": "eval-014",
+      "input": "I need emergency medical care and cannot afford it",
+      "expected_intent": "eligibility_check",
+      "expected_escalation": true
+    },
+    {
+      "id": "eval-015",
+      "input": "Where can I find the Sacramento county office?",
+      "expected_intent": "county_info",
+      "expected_route": "county_services"
+    }
+  ]
+}

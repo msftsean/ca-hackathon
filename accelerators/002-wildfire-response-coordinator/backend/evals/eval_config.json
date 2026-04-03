@@ -1,0 +1,99 @@
+{
+  "accelerator": "002-wildfire-response-coordinator",
+  "version": "0.1.0",
+  "test_cases": [
+    {
+      "id": "eval-001",
+      "input": "New wildfire reported in Butte County, 500 acres burning",
+      "expected_intent": "incident_report",
+      "expected_route": "incident_command",
+      "expected_priority": "critical"
+    },
+    {
+      "id": "eval-002",
+      "input": "We need 5 more engines and 2 helicopter crews deployed",
+      "expected_intent": "resource_request",
+      "expected_route": "resource_management",
+      "expected_priority": "high"
+    },
+    {
+      "id": "eval-003",
+      "input": "What are the current evacuation zones in the fire area?",
+      "expected_intent": "evacuation_query",
+      "expected_route": "evacuation_ops",
+      "expected_priority": "critical"
+    },
+    {
+      "id": "eval-004",
+      "input": "Check weather conditions and red flag warnings",
+      "expected_intent": "weather_check",
+      "expected_route": "weather_ops"
+    },
+    {
+      "id": "eval-005",
+      "input": "Are there any PGE power shutoff events planned?",
+      "expected_intent": "psps_info",
+      "expected_route": "utility_coordination"
+    },
+    {
+      "id": "eval-006",
+      "input": "Coordinate mutual aid request with adjacent agencies",
+      "expected_intent": "agency_coordination",
+      "expected_route": "interagency"
+    },
+    {
+      "id": "eval-007",
+      "input": "What is the containment status of CA-BTU-004521?",
+      "expected_intent": "status_update",
+      "expected_route": "incident_command"
+    },
+    {
+      "id": "eval-008",
+      "input": "Fire is catastrophic and out of control, need immediate help",
+      "expected_intent": "incident_report",
+      "expected_escalation": true
+    },
+    {
+      "id": "eval-009",
+      "input": "Red flag warning with active fire conditions in the area",
+      "expected_intent": "incident_report",
+      "expected_escalation": true
+    },
+    {
+      "id": "eval-010",
+      "input": "Send dozer and water tender to the fire line",
+      "expected_intent": "resource_request",
+      "expected_route": "resource_management"
+    },
+    {
+      "id": "eval-011",
+      "input": "What shelters are open for evacuated residents?",
+      "expected_intent": "evacuation_query",
+      "expected_route": "evacuation_ops"
+    },
+    {
+      "id": "eval-012",
+      "input": "Report smoke visible from Sacramento area",
+      "expected_intent": "incident_report",
+      "expected_route": "incident_command"
+    },
+    {
+      "id": "eval-013",
+      "input": "What is the humidity and wind speed forecast?",
+      "expected_intent": "weather_check",
+      "expected_route": "weather_ops"
+    },
+    {
+      "id": "eval-014",
+      "input": "SCE utility power outage affecting customers",
+      "expected_intent": "psps_info",
+      "expected_route": "utility_coordination"
+    },
+    {
+      "id": "eval-015",
+      "input": "Contact CAL FIRE incident commander for update",
+      "expected_intent": "incident_report",
+      "expected_route": "incident_command"
+    }
+  ]
+}
