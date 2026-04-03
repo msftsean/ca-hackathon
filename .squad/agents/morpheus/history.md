@@ -13,6 +13,8 @@
 
 - **2026-04-02 (Morpheus):** Rebranded CLAUDE.md and .github/copilot-instructions.md from 47 Doors university context to California State AI Hackathon Accelerators. Updated all project references, added 8 accelerator IDs with agency mappings, added CA governance context (EO N-12-23, N-5-26, SB 53, CCPA/CPRA), clarified architecture pattern and project structure for CA state deployments.
 
+- **2026-04-03 (Morpheus):** Created deployment infrastructure for all 8 accelerators: docker-compose.accelerators.yml enables local multi-accelerator development with clean port mapping (8001-8008 backend, 3001-3008 frontend); scripts/azd-deploy.sh provides selective deployment to Azure Container Apps (all/platform/specific accelerator); documentation updates in CLAUDE.md and copilot-instructions.md give developers clear deployment paths. Key learning: Accelerator 005 (GenAI Procurement Compliance) is backend-only — deployment tooling must handle mixed frontend/backend-only patterns across accelerators.
+
 ## Work Log
 
 ### 2026-03-13T18:46:00Z — Azure-First Spec Update (Morpheus)

@@ -325,3 +325,51 @@ California state government hackathon requires realistic state services context.
 - Languages: English-primary → multilingual mandate (Spanish, Chinese, Vietnamese, Tagalog, Korean)
 - Service hours: Business hours → 24/7 emergency services (Cal OES)
 - Escalation: Title IX, academic probation → whistleblower, CPRA, constituent threats
+
+### 2026-04-02 — CA Hackathon Infrastructure Deployment Configuration
+
+**What was changed**
+
+Updated infrastructure files for California Hackathon deployment, rebranding from university context to CA state government accelerators:
+
+1. **infra/main.bicep** (now 586 lines)
+   - **Rebranding:** "University Front Door" → "CA Hackathon Accelerator Platform", resourcePrefix default `frontdoor` → `cahack`, solution-accelerator tag → `ca-hackathon-accelerator`, Cosmos database `frontdoor` → `cahackathon`
+   - **New resources:** Azure Translator (`${prefix}-translator`, S1, TextTranslation kind) for 008-multilingual-emergency-chat, Azure Document Intelligence (`${prefix}-docintl`, S0, FormRecognizer kind) for 003-medi-cal-eligibility document processing
+   - **Accelerator loops:** Added `acceleratorIds` parameter (array of '001'-'008'), `acceleratorConfig` variable with 8 accelerators (id, name, hasFrontend), `activeAccelerators` filtered list, loop-based Container App resources (`accelBackends`, `accelFrontends`) with minReplicas: 0 (scale-to-zero for cost optimization)
+   - **Role assignments:** Automated RBAC loops for all accelerator backends → OpenAI Cognitive Services User role, Search Index Data Reader role
+   - **Outputs:** Added `ACCELERATOR_BACKEND_URLS` array with id/name/url for all deployed accelerators
+
+2. **infra/main.parameters.json**
+   - Changed resourcePrefix: `frontdoor` → `cahack`
+   - Added `acceleratorIds` parameter with all 8 IDs: ["001", "002", "003", "004", "005", "006", "007", "008"]
+
+3. **azure.yaml**
+   - **Rebranding:** name: `ca-hackathon-accelerators`, template: `ca-hackathon-accelerators@1.0.0`
+   - **Services:** Added 15 accelerator services (8 backends, 7 frontends — 005 backend-only), matching azd-service-name tags in Bicep (accel-001, accel-001-fe, accel-002, ..., accel-008-fe)
+   - **Hooks:** Updated to CA Hackathon context with emoji status indicators (🚀, ✅, 🎉)
+
+**Architecture decisions**
+
+- **Loop-based deployment pattern:** Bicep loops (`[for accel in activeAccelerators: {...}]`) enable declarative scaling from 1 to 8 accelerators without resource duplication. All accelerators share OpenAI, Search, Cosmos, ACR but get isolated Container Apps.
+- **Scale-to-zero for accelerators:** minReplicas: 0 for all accelerator apps (vs minReplicas: 1 for core platform) — reduces idle costs when accelerators aren't in use during demo periods.
+- **Selective frontend deployment:** Only 7/8 accelerators have frontends (005-procurement-compliance is backend-only). Loop uses `accelWithFrontends` filtered array to avoid deploying unused frontend containers.
+- **hasFrontend flag pattern:** Declarative config in `acceleratorConfig` array drives conditional frontend deployment — change one boolean to add/remove frontend for any accelerator.
+- **Managed identity by default:** All accelerator backends use SystemAssigned identity with automated RBAC role assignments (no API keys stored in env vars) — aligned with CA EO N-12-23 security requirements.
+- **azd-service-name consistency:** Bicep tags must match azure.yaml service names exactly (accel-001 → accel-001, accel-001-fe → accel-001-fe) for `azd deploy` to target correct resources.
+
+**Key file paths**
+
+- `infra/main.bicep` — Main IaC template with accelerator loops
+- `infra/main.parameters.json` — Deployment parameters with acceleratorIds array
+- `azure.yaml` — Azure Developer CLI service definitions
+
+**Why**
+
+California Hackathon requires deploying 8 independent accelerators (BenefitsCal Navigator, Wildfire Response, Medi-Cal Eligibility, Permit Streamliner, Procurement Compliance, Knowledge Hub, EDD Claims, Emergency Chat) each with isolated backend and (optionally) frontend. Loop-based infrastructure enables selective deployment (deploy only 001-003 for testing, then scale to all 8 for production) and cost optimization (scale unused accelerators to zero).
+
+**Resource count**
+
+- Core platform: 2 Container Apps (backend, frontend), 1 OpenAI, 1 Cosmos, 1 Search, 1 ACS, 1 ACR, 1 Key Vault, 1 Log Analytics, 1 Translator, 1 Document Intelligence = 12 resources
+- Per accelerator: 1 backend Container App + 0-1 frontend Container App = 1-2 resources each
+- Total with all 8 accelerators: 12 + 8 backends + 7 frontends = 27 Container Apps + 10 shared services = 37 resources
+

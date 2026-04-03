@@ -154,3 +154,68 @@
 - EO N-12-23, N-5-26, SB 53 are key compliance touchpoints for CA state AI
 - Envision 2026 is the strategic umbrella for digital transformation
 - Mock mode is critical for prototyping without Azure credentials
+
+### 2026-04-02 — Docker Configuration for All Accelerators
+
+**What:** Created standardized Dockerfiles and nginx configs for all 8 accelerators to enable containerized deployment.
+
+**Files created (22 total):**
+- Backend Dockerfiles: `accelerators/*/backend/Dockerfile` (8 files)
+- Frontend Dockerfiles: `accelerators/*/frontend/Dockerfile` (7 files — skip 005 which has no frontend)
+- Nginx configs: `accelerators/*/frontend/nginx.conf` (7 files)
+
+**Key patterns:**
+- Backend Dockerfiles: Python 3.12-slim base, uvicorn server on port 8000, non-root appuser, health check at `/health` (NOT `/api/health` like core platform)
+- Frontend Dockerfiles: Node 20-alpine builder stage → nginx alpine runtime, multi-stage build, envsubst for BACKEND_URL injection
+- Nginx configs: Identical across all accelerators — SPA routing (try_files), /api/ proxy to backend, gzip compression, security headers (X-Frame-Options, X-Content-Type-Options, X-XSS-Protection), static asset caching (1y expires for /assets/)
+- All Dockerfiles use health checks: `curl -f` for backend, `wget --spider` for frontend
+
+**Architecture decisions:**
+- Consistent containerization across all accelerators for Kubernetes/ACA deployment
+- Health check paths differ: core platform `/api/health`, accelerators `/health`
+- Frontend-backend communication via nginx reverse proxy (location /api/)
+- Environment-based backend URL injection (ENV BACKEND_URL in Dockerfile + envsubst in CMD)
+
+**Files structure:**
+```
+accelerators/
+  001-benefitscal-navigator/
+    backend/Dockerfile
+    frontend/Dockerfile
+    frontend/nginx.conf
+  002-wildfire-response-coordinator/
+    backend/Dockerfile
+    frontend/Dockerfile
+    frontend/nginx.conf
+  003-medi-cal-eligibility/
+    backend/Dockerfile
+    frontend/Dockerfile
+    frontend/nginx.conf
+  004-permit-streamliner/
+    backend/Dockerfile
+    frontend/Dockerfile
+    frontend/nginx.conf
+  005-genai-procurement-compliance/
+    backend/Dockerfile
+    (no frontend — API-only)
+  006-cross-agency-knowledge-hub/
+    backend/Dockerfile
+    frontend/Dockerfile
+    frontend/nginx.conf
+  007-edd-claims-assistant/
+    backend/Dockerfile
+    frontend/Dockerfile
+    frontend/nginx.conf
+  008-multilingual-emergency-chat/
+    backend/Dockerfile
+    frontend/Dockerfile
+    frontend/nginx.conf
+```
+
+**Key learnings:**
+- Accelerator health endpoints are at `/health` (not `/api/health`)
+- All backend Dockerfiles identical except for directory context
+- All frontend Dockerfiles + nginx configs identical across accelerators
+- Multi-stage builds keep frontend images small (~50MB vs ~1GB)
+- Non-root users (appuser) improve container security posture
+- Health checks enable Kubernetes/ACA readiness/liveness probes
