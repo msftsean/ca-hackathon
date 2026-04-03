@@ -31,23 +31,22 @@ This work supports California's **Envision 2026** strategy, Executive Orders **N
 
 ## 🎯 The 8 Accelerators
 
-| # | Accelerator | Agency | Status | Description |
-|---|-------------|--------|--------|-------------|
-| 001 | BenefitsCal Navigator Agent | CDSS | 📋 Spec | Natural language Q&A for CalFresh, CalWORKs eligibility |
-| 002 | Wildfire Response Coordinator | CAL FIRE / Cal OES | 📋 Spec | Multi-agent wildfire incident coordination |
-| 003 | Medi-Cal Eligibility Agent | DHCS | 📋 Spec | Automated eligibility pre-determination |
-| 004 | Permit Streamliner | OPR / HCD / DCA | 📋 Spec | Intelligent permit/license intake and routing |
-| 005 | GenAI Procurement Compliance | CDT / DGS | 📋 Spec | AI vendor attestation review against EO N-5-26 |
-| 006 | Cross-Agency Knowledge Hub | GovOps | 📋 Spec | Permission-aware federated search across 200+ agencies |
-| 007 | EDD Claims Assistant | EDD | 📋 Spec | Natural language Q&A for UI/DI/PFL claims |
-| 008 | Multilingual Emergency Chatbot | Cal OES | 📋 Spec | Emergency info in 70+ languages, SMS-capable |
+| # | Accelerator | Agency | Description | Complexity | Key Tech |
+|---|-------------|--------|-------------|------------|----------|
+| 001 | [BenefitsCal Navigator](accelerators/001-benefitscal-navigator/) | CDSS | Natural language benefits eligibility Q&A with multi-language support | ⭐⭐⭐ | Azure AI Search, Realtime API |
+| 002 | [Wildfire Response Coordinator](accelerators/002-wildfire-response-coordinator/) | CAL FIRE / Cal OES | Multi-agency wildfire incident coordination and evacuation planning | ⭐⭐⭐⭐ | Azure Maps, MCP Tools |
+| 003 | [Medi-Cal Eligibility Agent](accelerators/003-medi-cal-eligibility/) | DHCS | Automated document extraction and eligibility pre-determination | ⭐⭐⭐⭐ | Document Intelligence |
+| 004 | [Permit Streamliner](accelerators/004-permit-streamliner/) | OPR / HCD / DCA | AI-powered permit intake, routing, and SLA tracking | ⭐⭐⭐ | Azure AI Search |
+| 005 | [GenAI Procurement Compliance](accelerators/005-genai-procurement-compliance/) | CDT / DGS | Vendor AI attestation review against EO N-5-26 | ⭐⭐ | Semantic Kernel |
+| 006 | [Cross-Agency Knowledge Hub](accelerators/006-cross-agency-knowledge-hub/) | GovOps | Permission-aware federated search across 200+ agencies | ⭐⭐⭐ | Hybrid Search, Entra ID |
+| 007 | [EDD Claims Assistant](accelerators/007-edd-claims-assistant/) | EDD | Voice-enabled claims status and eligibility screening | ⭐⭐⭐ | Realtime API, WebRTC |
+| 008 | [Multilingual Emergency Chatbot](accelerators/008-multilingual-emergency-chat/) | Cal OES | 70+ language emergency info with SMS support | ⭐⭐ | Azure Translator |
 
-Each accelerator lives in `specs/` with full specification, plan, and implementation artifacts.
+Each accelerator has a full specification in `specs/` and an implementation project in `accelerators/`.
 
 ---
 
 ## 🏗️ Architecture: The 3-Agent Pipeline Pattern
-
 
 All accelerators follow a consistent three-agent architecture:
 
@@ -59,41 +58,58 @@ All accelerators follow a consistent three-agent architecture:
                               │
                               ▼
                     ┌──────────────────┐
-                    │   QueryAgent     │  ← Analyzes user input
-                    │   (GPT-4o)       │    Extracts intent & entities
-                    └────────┬─────────┘    Validates against constitution
+                    │   QueryAgent     │  ← Intent detection
+                    │   (GPT-4o)       │    Entity extraction
+                    └────────┬─────────┘    PII filtering
                              │
                              ▼
                     ┌──────────────────┐
-                    │   RouterAgent    │  ← Determines action path
-                    │   (Semantic      │    Routes to correct handler
-                    │    Kernel)       │    Maintains session context
+                    │   RouterAgent    │  ← Agency routing
+                    │   (Semantic      │    Priority setting
+                    │    Kernel)       │    Escalation triggers
                     └────────┬─────────┘
                              │
                  ┌───────────┼──────────────┐
                  ▼           ▼              ▼
           ┌──────────┐ ┌──────────┐  ┌──────────┐
-          │ RAG KB   │ │ API Call │  │ Escalate │  ← Action handlers
-          │ Search   │ │ (SNOW,   │  │ to Human │    Execute intent
-          │ (AI      │ │  CRM)    │  │          │    Log & audit
+          │ RAG KB   │ │ API Call │  │ Escalate │  ← Knowledge retrieval
+          │ Search   │ │ (SNOW,   │  │ to Human │    Ticket creation
+          │ (AI      │ │  CRM)    │  │          │    Response formatting
           │  Search) │ │          │  │          │
           └──────────┘ └──────────┘  └──────────┘
 ```
 
-**Why Three Agents?**
+### Agent Responsibilities
 
-1. **Separation of Concerns**: Each agent has a single, well-defined responsibility
-2. **Governability**: Easier to audit, test, and control behavior at each stage
-3. **Reusability**: Router logic and action handlers can be shared across accelerators
-4. **Transparency**: Clear decision trails for compliance and debugging
+| Agent | Role | Key Capabilities |
+|-------|------|-----------------|
+| **QueryAgent** | Understands user input | Intent detection, entity extraction, PII filtering, input validation against constitution |
+| **RouterAgent** | Determines action path | Agency routing, priority setting, escalation triggers, session context management |
+| **ActionAgent** | Executes the action | Knowledge retrieval (RAG), ticket creation, API calls, response formatting, audit logging |
 
-**Shared Platform Code:**
+### Why Three Agents?
 
-All accelerators share common infrastructure in the `shared/` directory:
-- `shared/platform/`: Core 3-agent orchestration engine
-- `shared/ui-components/`: Reusable React components
-- `shared/templates/`: Constitution and spec templates
-- `shared/infra/`: Bicep modules for Azure deployment
+1. **Separation of Concerns** — Each agent has a single, well-defined responsibility
+2. **Governability** — Easier to audit, test, and control behavior at each stage
+3. **Reusability** — Router logic and action handlers can be shared across accelerators
+4. **Transparency** — Clear decision trails for compliance and debugging
+
+---
+
+## 🧩 Platform vs. Accelerators
+
+This repository separates **shared platform infrastructure** from **individual accelerator projects**, allowing teams to work independently while sharing a common foundation.
+
+| Layer | Location | Purpose |
+|-------|----------|---------|
+| **Core Platform** | `backend/`, `frontend/` | Reference implementation of the 3-agent pipeline (FastAPI + React) |
+| **Shared Governance** | `shared/` | Constitution templates, routing schemas, and cross-accelerator policies ensuring CA compliance |
+| **Accelerators** | `accelerators/` | Self-contained projects — each can be developed, tested, and deployed independently |
+| **Specifications** | `specs/` | Spec-driven definitions for each accelerator: `spec.md`, `plan.md`, `tasks.md`, `constitution.md` |
+| **Workshop Labs** | `labs/` | Hands-on learning curriculum (8 labs) teaching the 3-agent pattern step by step |
+| **Infrastructure** | `infra/` | Reusable Bicep IaC modules for Azure deployment |
+
+**Spec-driven development**: Every accelerator starts with a specification before any code is written. Specs live in `specs/<accelerator-id>/` and define requirements, architecture decisions, task breakdowns, and governance rules.
 
 ---
 
@@ -115,38 +131,10 @@ All accelerators share common infrastructure in the `shared/` directory:
 
 ---
 
-## 🏁 Quick Start
-# because the browser cannot reach localhost inside the container.
-# VITE_API_BASE_URL=    <-- must be empty or unset
+## 🏁 Getting Started
 
-npm run dev
-```
+### Quick Start (Mock Mode)
 
-**⚠️ Important Codespaces Configuration:**
-
-1. 🔓 **Make port 8000 public** for external access:
-
-   ```bash
-   gh codespace ports visibility 8000:public -c $CODESPACE_NAME
-   ```
-
-2. 🔗 **Get your Codespaces URLs** from the Ports tab in VS Code, or construct them:
-   - 🎨 Frontend: `https://<codespace-name>-5173.app.github.dev`
-   - 🔧 Backend: `https://<codespace-name>-8000.app.github.dev`
-   - Your codespace name is in the environment variable `$CODESPACE_NAME`
-
-3. ⚙️ **Update CORS configuration** in [backend/.env](backend/.env):
-
-   ```bash
-   CORS_ORIGINS=["http://localhost:5173","http://localhost:3000","https://<your-codespace-name>-5173.app.github.dev"]
-   ```
-
-   Note: The backend config uses `validation_alias` to map `CORS_ORIGINS` from .env to the `allowed_origins` setting.
-
-4. 🔄 **Restart the backend** after updating CORS settings to clear the settings cache.
-
-5. ⚠️ **Frontend `.env` — Do NOT set `VITE_API_BASE_URL` to `http://localhost:8000`!**
-   In Codespaces, the browser runs outside the container and cannot reach `localhost:8000`.
 ```bash
 # 1. Open in GitHub Codespaces (recommended) or clone locally
 
@@ -160,25 +148,75 @@ npm start
 npm run smoke-test
 ```
 
-> **Mock mode** lets you develop and demo without Azure credentials. Perfect for prototyping and testing the 3-agent pipeline locally.
+> **Mock mode** lets you develop and demo without Azure credentials. Labs 00–03 work entirely in mock mode — perfect for prototyping and testing the 3-agent pipeline locally.
+
+### Running a Specific Accelerator
+
+Each accelerator in `accelerators/` is a self-contained project. To work on one:
+
+```bash
+# Navigate to the accelerator
+cd accelerators/001-benefitscal-navigator
+
+# Follow its local README for setup and run instructions
+```
+
+### Viewing Specs
+
+Specifications define each accelerator's requirements before code is written:
+
+```bash
+# Browse all specs
+ls specs/
+
+# View a specific accelerator's spec
+cat specs/001-benefitscal-navigator/spec.md
+```
+
+Each spec directory contains:
+- `spec.md` — Feature specification and requirements
+- `plan.md` — Implementation plan and architecture decisions
+- `tasks.md` — Dependency-ordered task breakdown
+- `constitution.md` — Governance rules for agent behavior
+
+### Codespaces Configuration
+
+When running in GitHub Codespaces:
+
+1. **Make port 8000 public** for external access:
+   ```bash
+   gh codespace ports visibility 8000:public -c $CODESPACE_NAME
+   ```
+
+2. **Get your Codespaces URLs** from the Ports tab, or construct them:
+   - Frontend: `https://<codespace-name>-5173.app.github.dev`
+   - Backend: `https://<codespace-name>-8000.app.github.dev`
+
+3. **Update CORS configuration** in [backend/.env](backend/.env):
+   ```bash
+   CORS_ORIGINS=["http://localhost:5173","http://localhost:3000","https://<your-codespace-name>-5173.app.github.dev"]
+   ```
+
+4. **Do NOT set `VITE_API_BASE_URL`** to `http://localhost:8000` — in Codespaces the browser runs outside the container and cannot reach `localhost`.
+
+5. **Restart the backend** after updating CORS settings.
 
 ---
 
 ## 🏛️ California Governance & Compliance
 
-This project is designed to align with California's emerging AI governance framework:
+This project is designed to align with California's AI governance framework:
 
 ### 📜 Executive Orders & Legislation
 
-- **EO N-12-23 (GenAI Guidelines for State Agencies)**: Establishes principles for responsible AI use in government, including transparency, accountability, and bias mitigation. Each accelerator's `constitution.md` codifies these principles into agent behavior.
-
-- **EO N-5-26 (AI Procurement Requirements)**: Mandates AI vendor attestations for safety, security, and explainability. The **GenAI Procurement Compliance** accelerator (#005) automates review of vendor submissions against these requirements.
-
-- **SB 53 (AI Safety)**: Requires state agencies to assess AI systems for risk and implement safeguards. All accelerators include risk assessments and guardrails in their specifications.
-
-- **Breakthrough Project**: Governor's initiative to modernize permitting processes. The **Permit Streamliner** accelerator (#004) directly supports this goal with AI-powered intake and routing.
-
-- **Envision 2026 Strategy**: CDT's vision for digital transformation across California government. These accelerators demonstrate practical AI implementations aligned with strategic goals.
+| Policy | What It Covers | Relevant Accelerator(s) |
+|--------|---------------|------------------------|
+| **EO N-12-23** | GenAI guidelines for state agencies — transparency, accountability, bias mitigation | All — codified in each `constitution.md` |
+| **EO N-5-26** | AI procurement & vendor attestation for safety, security, explainability | #005 GenAI Procurement Compliance |
+| **SB 53** | AI safety — risk assessment and safeguards for state AI systems | All — risk assessments in specs |
+| **CCPA/CPRA** | California consumer privacy — PII handling, data minimization | All — PII filtering in QueryAgent |
+| **Envision 2026** | CDT's digital transformation strategy for California government | All — strategic alignment |
+| **Breakthrough Project** | Governor's initiative to modernize permitting processes | #004 Permit Streamliner |
 
 ### 🔐 Constitution-Driven Governance
 
@@ -204,6 +242,27 @@ The constitution is **executable** — it's referenced in agent prompts and enfo
 
 ---
 
+## 📚 Workshop Labs
+
+The `labs/` directory contains an **8-lab curriculum** that teaches the 3-agent pipeline pattern step by step:
+
+| Lab | Topic | Azure Required? |
+|-----|-------|-----------------|
+| 00 | Environment Setup | No |
+| 01 | Understanding Agents | No |
+| 02 | Building a QueryAgent | No |
+| 03 | Adding a RouterAgent | No |
+| 04 | Connecting Azure OpenAI | Yes |
+| 05 | RAG with Azure AI Search | Yes |
+| 06 | Voice with Realtime API | Yes |
+| 07 | End-to-End Accelerator | Yes |
+
+Labs 00–03 run entirely in **mock mode** — no Azure credentials needed. Labs 04+ require an Azure subscription with the appropriate services provisioned.
+
+See the [Coach Guide](coach-guide/) for facilitation tips and workshop logistics.
+
+---
+
 ## 📂 Project Structure
 
 ```
@@ -216,14 +275,17 @@ ca-hackathon/
 │   │   └── constitution.md         # Governance rules
 │   ├── 002-wildfire-coordinator/
 │   └── ...
-├── accelerators/                   # Implemented accelerators (TBD)
-│   └── 001-benefitscal-navigator/
+├── accelerators/                   # Implemented accelerators
+│   ├── 001-benefitscal-navigator/
+│   ├── 002-wildfire-response-coordinator/
+│   └── ...
 ├── shared/                         # Shared platform code
+│   ├── constitution.md             # Root governance document
 │   ├── platform/                   # Core 3-agent engine
 │   ├── ui-components/              # React component library
 │   ├── templates/                  # Spec & constitution templates
 │   └── infra/                      # Reusable Bicep modules
-├── labs/                           # Hands-on learning labs
+├── labs/                           # 8-lab workshop curriculum
 │   ├── 00-setup/
 │   ├── 01-understanding-agents/
 │   └── ...
@@ -240,7 +302,8 @@ ca-hackathon/
 │   │   └── App.tsx
 │   └── tests/
 ├── infra/                          # Bicep IaC for Azure deployment
-└── docs/                           # Architecture diagrams, guides
+├── docs/                           # Architecture diagrams, guides
+└── coach-guide/                    # Workshop facilitation guide
 ```
 
 ---
@@ -249,12 +312,13 @@ ca-hackathon/
 
 ```bash
 # Backend tests
-cd backend
-pytest
+cd backend && python -m pytest -x
 
 # Frontend tests
-cd frontend
-npm test
+cd frontend && npm run test
+
+# Lint Python code
+ruff check .
 
 # E2E tests
 npm run test:e2e
@@ -289,7 +353,7 @@ azd deploy
 - Azure Application Insights (monitoring)
 - Azure Key Vault (secrets)
 
-**Cost estimate**: ~$50-200/month per accelerator depending on usage (development tier)
+**Cost estimate**: ~$50–200/month per accelerator depending on usage (development tier)
 
 ---
 
@@ -317,7 +381,7 @@ We welcome contributions from California state agency staff, vendors, and civic 
 
 ## 📄 License
 
-MIT License - see [LICENSE](LICENSE) for details.
+MIT License — see [LICENSE](LICENSE) for details.
 
 **Note**: This is open-source reference architecture. Agencies are responsible for compliance with state procurement, security, and privacy requirements when deploying to production.
 
@@ -341,7 +405,7 @@ Built for the **California State Hackathon** by teams from:
 - Department of Health Care Services (DHCS)
 - And many more California state agencies
 
-**Powered by**: Azure OpenAI • Semantic Kernel • FastAPI • React • TypeScript
+**Powered by**: Azure OpenAI · Semantic Kernel · FastAPI · React · TypeScript
 
 ---
 
