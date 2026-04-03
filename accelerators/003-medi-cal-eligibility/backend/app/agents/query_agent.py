@@ -8,12 +8,15 @@ class QueryAgent:
     """Detects user intent, extracts entities, and filters PII from Medi-Cal queries."""
 
     INTENT_KEYWORDS: dict[str, list[str]] = {
-        "eligibility_check": ["eligible", "qualify", "can i get", "medi-cal", "do i qualify", "am i eligible"],
+        "eligibility_check": [
+            "eligible", "qualify", "can i get", "do i qualify", "am i eligible",
+            "do we qualify", "need medical", "cannot afford", "need coverage", "disability",
+        ],
         "application_status": ["status", "my application", "where is my", "progress", "approved", "denied", "pending"],
-        "income_verification": ["income", "earn", "make", "salary", "wages", "pay", "w-2", "paycheck"],
         "document_help": ["document", "upload", "submit", "proof", "w2", "paystub", "tax return", "verification"],
+        "income_verification": ["income", "earn", "make", "salary", "wages", "pay", "w-2", "paycheck"],
+        "county_info": ["county", "local office", "where to go", "office location", "nearest", "office in"],
         "program_info": ["what is", "types", "coverage", "benefits", "difference", "programs", "explain"],
-        "county_info": ["county", "local office", "where to go", "office location", "nearest"],
     }
 
     PROGRAM_KEYWORDS: dict[str, str] = {

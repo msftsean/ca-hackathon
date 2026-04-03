@@ -9,7 +9,7 @@ class QueryAgent:
     """First stage: parses user input into a structured EmergencyQuery."""
 
     INTENT_KEYWORDS: dict[str, list[str]] = {
-        "active_alerts": ["alert", "warning", "danger", "emergency", "notification", "update"],
+        "active_alerts": ["alert", "warning", "danger", "emergency", "notification", "update", "flooding"],
         "evacuation_status": ["evacuate", "evacuation", "leave", "flee", "escape", "order"],
         "shelter_search": ["shelter", "refuge", "safe place", "housing", "stay", "sleep"],
         "air_quality": ["air", "aqi", "smoke", "breathing", "pollution", "quality"],
@@ -33,6 +33,11 @@ class QueryAgent:
         emergency_type = self._detect_emergency_type(lower)
         location = self._extract_location(user_input)
         has_pii = self._check_pii(user_input)
+
+        # If no specific intent matched but an emergency type was detected,
+        # the user is likely asking about an active incident.
+        if intent == "general_info" and emergency_type is not None:
+            intent = "active_alerts"
 
         entities: dict = {"has_pii": has_pii}
         if location:

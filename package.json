@@ -18,7 +18,24 @@
     "build": "cd frontend && npm run build",
     "setup": "npm run setup:backend && npm run setup:frontend",
     "setup:backend": "cd backend && pip install -r requirements.txt",
-    "setup:frontend": "cd frontend && npm install"
+    "setup:frontend": "cd frontend && npm install",
+    "accel:001": "cd accelerators/001-benefitscal-navigator/backend && USE_MOCK_SERVICES=true uvicorn app.main:app --port 8000 --reload",
+    "accel:002": "cd accelerators/002-wildfire-response-coordinator/backend && USE_MOCK_SERVICES=true uvicorn app.main:app --port 8000 --reload",
+    "accel:003": "cd accelerators/003-medi-cal-eligibility/backend && USE_MOCK_SERVICES=true uvicorn app.main:app --port 8000 --reload",
+    "accel:004": "cd accelerators/004-permit-streamliner/backend && USE_MOCK_SERVICES=true uvicorn app.main:app --port 8000 --reload",
+    "accel:005": "cd accelerators/005-genai-procurement-compliance/backend && USE_MOCK_SERVICES=true uvicorn app.main:app --port 8000 --reload",
+    "accel:006": "cd accelerators/006-cross-agency-knowledge-hub/backend && USE_MOCK_SERVICES=true uvicorn app.main:app --port 8000 --reload",
+    "accel:007": "cd accelerators/007-edd-claims-assistant/backend && USE_MOCK_SERVICES=true uvicorn app.main:app --port 8000 --reload",
+    "accel:008": "cd accelerators/008-multilingual-emergency-chat/backend && USE_MOCK_SERVICES=true uvicorn app.main:app --port 8000 --reload",
+    "test:all": "./scripts/run-evals.sh all",
+    "test:001": "cd accelerators/001-benefitscal-navigator/backend && python -m pytest tests/ evals/ -v",
+    "test:002": "cd accelerators/002-wildfire-response-coordinator/backend && python -m pytest tests/ evals/ -v",
+    "test:003": "cd accelerators/003-medi-cal-eligibility/backend && python -m pytest tests/ evals/ -v",
+    "test:004": "cd accelerators/004-permit-streamliner/backend && python -m pytest tests/ evals/ -v",
+    "test:005": "cd accelerators/005-genai-procurement-compliance/backend && python -m pytest tests/ evals/ -v",
+    "test:006": "cd accelerators/006-cross-agency-knowledge-hub/backend && python -m pytest tests/ evals/ -v",
+    "test:007": "cd accelerators/007-edd-claims-assistant/backend && python -m pytest tests/ evals/ -v",
+    "test:008": "cd accelerators/008-multilingual-emergency-chat/backend && python -m pytest tests/ evals/ -v"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
