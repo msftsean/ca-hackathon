@@ -244,3 +244,46 @@
 **Team Coordination:** Paired with Switch's frontend `session.update` data-channel implementation (parallel spawn 2026-03-15T01:53) for belt-and-suspenders transcription enablement. Backend config change ensures system prompt and transcription are always available; frontend change adds runtime safety net.
 
 **Orchestration Log:** `.squad/orchestration-log/2026-03-15T01-53-tank.md`
+
+### 2026-02-02 — California State Government Rebranding
+
+**What was changed**
+
+Rebranded all shared/ configuration files from 47 Doors university context to California state government services:
+
+1. **shared/constitution.md** (v2.0.0)
+   - Replaced "47 Doors Agent Constitution" → "California State AI Agent Constitution"
+   - Replaced FERPA compliance → CA-specific: CCPA/CPRA, EO N-12-23 (GenAI), EO N-5-26 (AI procurement), SB 53, ADA/WCAG AA
+   - Updated domain from "Higher Education Student Services" → "California State Government Services"
+   - Replaced all student → constituent/resident terminology
+   - Added CA-specific requirements: multilingual access (5+ languages), California Envision 2026 alignment, county coordination, emergency services integration
+   - Updated examples from university scenarios (transcripts, housing) → state scenarios (benefits, permits, emergency services)
+   - Added voice-specific obligations for accessibility and crisis detection
+   - Updated escalation triggers: whistleblower, CPRA requests, constituent threats, discrimination
+
+2. **shared/department_routing.json** (v2.0)
+   - Replaced 6 university departments → 12 California state agencies: CDSS, DHCS, CAL FIRE, Cal OES, EDD, CDT, DMV, DGS, OPR, HCD, DCA, GovOps
+   - Updated all contact info: university.edu → .ca.gov domains, state phone patterns (1-800, 1-916)
+   - Changed timezone America/New_York → America/Los_Angeles
+   - Updated keywords for state services: calfresh, calworks, medi-cal, wildfire, unemployment, real id, procurement, ceqa, etc.
+   - Updated escalation triggers for state context: fraud report, cpra request, constituent threat, whistleblower
+
+3. **shared/sample_queries.json** (v2.0, 50 queries)
+   - Replaced ALL university queries → California constituent queries
+   - Coverage: CalFresh/CalWORKs (CDSS), Medi-Cal (DHCS), wildfire/fire permits (CAL FIRE), emergency/disaster (Cal OES), unemployment/disability (EDD), DMV services, procurement (DGS), housing (HCD), consumer complaints (DCA), CEQA (OPR), AI policy (CDT)
+   - Added multilingual queries: 5 Spanish queries (CalFresh, EBT, Medi-Cal, unemployment, DMV)
+   - Priority distribution: 7 urgent, 13 high, 27 medium, 3 low
+   - Changed schema: difficulty/is_ambiguous → priority/language for state service context
+
+**Why**
+
+California state government hackathon requires realistic state services context. University student support is not representative of constituent needs for benefits, emergency services, permits, and regulatory interactions. State government requires different compliance frameworks (CCPA/CPRA vs FERPA), multilingual support mandates, emergency services integration, and cross-agency coordination that don't exist in university context.
+
+**Key differences**
+
+- Compliance: FERPA → CCPA/CPRA, EO N-12-23, EO N-5-26, SB 53
+- Urgency: Academic deadlines → life-safety emergencies (wildfire, earthquake, homelessness)
+- Scale: Single institution → statewide 58-county system with 40M residents
+- Languages: English-primary → multilingual mandate (Spanish, Chinese, Vietnamese, Tagalog, Korean)
+- Service hours: Business hours → 24/7 emergency services (Cal OES)
+- Escalation: Title IX, academic probation → whistleblower, CPRA, constituent threats

@@ -110,3 +110,47 @@
 **Verification:** TypeScript compiles clean. Code review passed (Morpheus).
 
 **Orchestration Log:** `.squad/orchestration-log/2026-03-15T01-53-switch.md`
+
+### 2026-03-19 — README Rebrand for California State AI Hackathon
+
+**What:** Complete rewrite of root `README.md` to rebrand from "47 Doors" university student support to California state government AI accelerators. Replaced ALL university and 47 Doors references with California context.
+
+**Why:** Project pivot to focus on California State Hackathon — 8 AI accelerators for state agencies (CDSS, CAL FIRE, DHCS, EDD, Cal OES, etc.) aligned with CA governance framework (EO N-12-23, EO N-5-26, SB 53, Envision 2026).
+
+**Key changes:**
+- Header: "🏛️ California State AI Hackathon Accelerators" with CA Envision 2026 badge
+- Overview: 8 accelerators for CA agencies, constitution-driven governance, 3-agent pipeline pattern
+- Accelerator table: 001-008 with agency assignments (CDSS, CAL FIRE/Cal OES, DHCS, OPR/HCD/DCA, CDT/DGS, GovOps, EDD, Cal OES)
+- Architecture: Text-based 3-agent pipeline diagram (QueryAgent → RouterAgent → ActionAgent)
+- Tech stack: Table format with governance layer (EO N-12-23/N-5-26 compliant)
+- California Governance section: Executive orders, legislation (SB 53), Breakthrough Project, Envision 2026, constitution.md explanation
+- Project structure: specs/, accelerators/, shared/, labs/, backend/, frontend/
+- Removed: All 47 Doors branding, university student support use cases, boot camp curriculum details, deployment field notes
+
+**Files changed:**
+- `/workspaces/ca-hackathon/README.md` — 576 lines → 348 lines (complete rewrite)
+
+**Content patterns:**
+- All references to "47 Doors", "university", "student support" removed
+- New focus: California state agencies, public service delivery, governance compliance
+- Constitution-driven approach emphasized as executable policy (not just docs)
+- Each accelerator standalone but shares platform code (shared/)
+- Quick Start section streamlined (npm run setup → npm start → npm run smoke-test)
+
+**Preservation:**
+- Tech stack badges and versions maintained (Python, FastAPI, React, TypeScript, Azure)
+- Quick start commands unchanged (npm run setup, npm start, smoke-test)
+- Architecture diagrams and deployment patterns referenced (actual lab content unchanged)
+- License (MIT) and contributing guidelines maintained
+
+**Key file paths:**
+- README: `/workspaces/ca-hackathon/README.md`
+- Specs: `specs/001-benefitscal-navigator/`, `specs/002-wildfire-coordinator/`, etc.
+- Shared platform: `shared/platform/`, `shared/ui-components/`, `shared/templates/`, `shared/infra/`
+
+**Learnings for future:**
+- Constitution.md is central to CA governance narrative — it's executable policy, not documentation
+- All 8 accelerators share 3-agent pattern but serve different agencies/domains
+- EO N-12-23, N-5-26, SB 53 are key compliance touchpoints for CA state AI
+- Envision 2026 is the strategic umbrella for digital transformation
+- Mock mode is critical for prototyping without Azure credentials

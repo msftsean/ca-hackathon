@@ -1,14 +1,15 @@
 # Project Context
 
 - **Owner:** msftsean
-- **Project:** 47 Doors — Universal Front Door Support Agent for university student support
-- **Stack:** Python 3.11+ / FastAPI 0.109+, TypeScript 5 / React 18, Azure OpenAI, Azure AI Search, Pydantic v2.5+
-- **Architecture:** Three-agent pipeline (QueryAgent → RouterAgent → ActionAgent) with voice interaction via Azure OpenAI GPT-4o Realtime API / WebRTC
+- **Project:** California State AI Hackathon Accelerators — 8 AI accelerators for California state government agencies
+- **Stack:** Python 3.11+ / FastAPI 0.109+, TypeScript 5 / React 18, Azure OpenAI, Azure AI Search, Semantic Kernel, Azure Document Intelligence, Pydantic v2.5+
+- **Architecture:** Three-agent pipeline (QueryAgent → RouterAgent → ActionAgent) deployed across 8 accelerators for CDSS, CAL FIRE, DHCS, OPR, CDT, GovOps, EDD, Cal OES
+- **Governance:** EO N-12-23, EO N-5-26, SB 53, CCPA/CPRA compliance
 - **Created:** 2026-03-13
 
 ## Learnings
 
-<!-- Append new learnings below. Each entry is something lasting about the project. -->
+- **2026-04-02 (Morpheus):** Rebranded CLAUDE.md and .github/copilot-instructions.md from 47 Doors university context to California State AI Hackathon Accelerators. Updated all project references, added 8 accelerator IDs with agency mappings, added CA governance context (EO N-12-23, N-5-26, SB 53, CCPA/CPRA), clarified architecture pattern and project structure for CA state deployments.
 
 ## Work Log
 
