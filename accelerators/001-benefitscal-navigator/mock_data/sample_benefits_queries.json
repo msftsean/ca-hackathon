@@ -1,0 +1,37 @@
+[
+  {
+    "id": "q-001",
+    "query": "Am I eligible for CalFresh? I make $2,000 a month and live alone.",
+    "language": "en",
+    "expected_program": "calfresh",
+    "expected_intent": "eligibility_check"
+  },
+  {
+    "id": "q-002",
+    "query": "¿Cómo puedo solicitar CalWORKs para mi familia de 4 personas?",
+    "language": "es",
+    "expected_program": "calworks",
+    "expected_intent": "application_help"
+  },
+  {
+    "id": "q-003",
+    "query": "What documents do I need to apply for Medi-Cal?",
+    "language": "en",
+    "expected_program": "medi-cal",
+    "expected_intent": "document_requirements"
+  },
+  {
+    "id": "q-004",
+    "query": "Tôi có thể nhận được những chương trình trợ cấp nào?",
+    "language": "vi",
+    "expected_program": "general",
+    "expected_intent": "program_discovery"
+  },
+  {
+    "id": "q-005",
+    "query": "My CalFresh benefits were reduced last month. Why?",
+    "language": "en",
+    "expected_program": "calfresh",
+    "expected_intent": "benefit_inquiry"
+  }
+]

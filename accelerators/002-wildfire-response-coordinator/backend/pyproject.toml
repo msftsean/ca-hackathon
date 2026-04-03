@@ -1,0 +1,8 @@
+[project]
+name = "wildfire-response-coordinator"
+version = "0.1.0"
+description = "AI-powered emergency coordination for CAL FIRE and Cal OES"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

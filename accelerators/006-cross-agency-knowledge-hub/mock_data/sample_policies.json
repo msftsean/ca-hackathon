@@ -1,0 +1,42 @@
+[
+  {
+    "document_id": "POL-CDT-2024-001",
+    "title": "Statewide AI Use Policy",
+    "agency": "CDT",
+    "category": "AI Governance",
+    "effective_date": "2024-06-15",
+    "content_summary": "Establishes requirements for AI impact assessments, bias testing, and human oversight for all state agency AI deployments. Requires agencies to maintain an AI inventory and conduct annual reviews.",
+    "access_level": "public",
+    "tags": ["ai", "governance", "impact-assessment", "eo-n-12-23"]
+  },
+  {
+    "document_id": "PROC-DGS-2024-042",
+    "title": "IT Procurement Guidelines for AI Services",
+    "agency": "DGS",
+    "category": "Procurement",
+    "effective_date": "2024-09-01",
+    "content_summary": "Vendors providing AI services must submit attestation forms per EO N-5-26. Procurement officers must verify compliance with SB 53 safety requirements before contract execution.",
+    "access_level": "internal",
+    "tags": ["procurement", "attestation", "eo-n-5-26", "sb-53", "vendor"]
+  },
+  {
+    "document_id": "MEMO-GOVOPS-2024-007",
+    "title": "Cross-Agency Data Sharing Framework",
+    "agency": "GovOps",
+    "category": "Data Governance",
+    "effective_date": "2024-11-20",
+    "content_summary": "Agencies may share de-identified data for research and operational improvement. Requires data sharing agreements, CCPA compliance, and quarterly audit reporting.",
+    "access_level": "internal",
+    "tags": ["data-sharing", "ccpa", "privacy", "interagency"]
+  },
+  {
+    "document_id": "GUIDE-CALHR-2024-015",
+    "title": "AI-Assisted HR Decision Making Guidelines",
+    "agency": "CalHR",
+    "category": "Human Resources",
+    "effective_date": "2024-08-01",
+    "content_summary": "AI tools used in hiring, promotion, or performance evaluation must undergo bias audits. Human review required for all adverse actions informed by AI recommendations.",
+    "access_level": "internal",
+    "tags": ["hr", "hiring", "bias-audit", "human-oversight"]
+  }
+]

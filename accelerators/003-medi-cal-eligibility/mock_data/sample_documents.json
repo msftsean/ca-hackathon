@@ -1,0 +1,49 @@
+[
+  {
+    "document_id": "doc-001",
+    "type": "w2",
+    "applicant": "Maria Garcia",
+    "employer": "Central Valley Farms LLC",
+    "tax_year": 2024,
+    "gross_wages": 28500.00,
+    "federal_tax_withheld": 2850.00,
+    "state_tax_withheld": 1140.00,
+    "extracted_fields": {
+      "box_1_wages": 28500.00,
+      "box_2_federal_tax": 2850.00,
+      "box_17_state_tax": 1140.00,
+      "employer_ein": "XX-XXXXXXX"
+    }
+  },
+  {
+    "document_id": "doc-002",
+    "type": "pay_stub",
+    "applicant": "James Chen",
+    "employer": "Sacramento Metro Transit",
+    "pay_period": "2025-01-01 to 2025-01-15",
+    "gross_pay": 1875.00,
+    "net_pay": 1425.00,
+    "ytd_gross": 3750.00,
+    "extracted_fields": {
+      "pay_rate": 23.44,
+      "hours_worked": 80,
+      "deductions": {
+        "federal_tax": 187.50,
+        "state_tax": 112.50,
+        "health_insurance": 150.00
+      }
+    }
+  },
+  {
+    "document_id": "doc-003",
+    "type": "ssi_statement",
+    "applicant": "Robert Williams",
+    "monthly_benefit": 943.00,
+    "benefit_type": "SSI",
+    "effective_date": "2025-01-01",
+    "extracted_fields": {
+      "federal_ssi": 943.00,
+      "state_supplement": 160.73
+    }
+  }
+]

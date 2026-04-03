@@ -1,0 +1,49 @@
+[
+  {
+    "alert_id": "ALERT-2025-001",
+    "title": "Wildfire Evacuation Warning",
+    "severity": "severe",
+    "emergency_type": "wildfire",
+    "affected_areas": ["Paradise", "Magalia", "Stirling City"],
+    "issued_at": "2025-03-15T10:00:00Z",
+    "expires_at": "2025-03-16T08:00:00Z",
+    "instructions": {
+      "en": "Prepare to evacuate. Gather essential items including medications, documents, and pet supplies. Monitor local news and Cal OES alerts.",
+      "es": "Prepárese para evacuar. Reúna artículos esenciales incluyendo medicamentos, documentos y suministros para mascotas. Monitoree las noticias locales y las alertas de Cal OES.",
+      "zh": "准备撤离。收集必需品，包括药物、文件和宠物用品。关注当地新闻和Cal OES警报。",
+      "vi": "Chuẩn bị sơ tán. Thu thập các vật dụng thiết yếu bao gồm thuốc, giấy tờ và đồ dùng cho thú cưng. Theo dõi tin tức địa phương và cảnh báo Cal OES.",
+      "ko": "대피를 준비하세요. 약품, 서류, 반려동물 용품 등 필수품을 모으세요. 지역 뉴스와 Cal OES 경보를 확인하세요.",
+      "tl": "Maghanda para sa paglikas. Tipunin ang mga mahahalagang bagay kabilang ang mga gamot, dokumento, at supplies para sa alagang hayop."
+    },
+    "source": "Cal OES / CAL FIRE"
+  },
+  {
+    "alert_id": "ALERT-2025-002",
+    "title": "Flood Watch",
+    "severity": "moderate",
+    "emergency_type": "flood",
+    "affected_areas": ["Sacramento", "West Sacramento", "Yolo County"],
+    "issued_at": "2025-03-15T06:00:00Z",
+    "expires_at": "2025-03-16T00:00:00Z",
+    "instructions": {
+      "en": "Avoid flood-prone areas. Do not drive through standing water. Move to higher ground if water rises.",
+      "es": "Evite áreas propensas a inundaciones. No conduzca por agua estancada. Muévase a terrenos más altos si el agua sube.",
+      "zh": "避开洪水易发区域。不要驾车通过积水。如果水位上升，转移到高处。"
+    },
+    "source": "Cal OES / NWS"
+  },
+  {
+    "alert_id": "ALERT-2025-003",
+    "title": "Earthquake Advisory",
+    "severity": "minor",
+    "emergency_type": "earthquake",
+    "affected_areas": ["San Francisco Bay Area"],
+    "issued_at": "2025-03-14T22:30:00Z",
+    "expires_at": "2025-03-15T22:30:00Z",
+    "instructions": {
+      "en": "A 3.2 magnitude earthquake was recorded. No tsunami threat. Review your earthquake preparedness kit.",
+      "es": "Se registró un terremoto de magnitud 3.2. Sin amenaza de tsunami. Revise su kit de preparación para terremotos."
+    },
+    "source": "Cal OES / USGS"
+  }
+]

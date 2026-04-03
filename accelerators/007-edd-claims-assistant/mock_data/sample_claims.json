@@ -1,0 +1,44 @@
+[
+  {
+    "claim_id": "UI-2025-1234567",
+    "program": "ui",
+    "program_name": "Unemployment Insurance",
+    "status": "approved",
+    "claimant": "Jane Doe",
+    "filed_date": "2025-02-01",
+    "weekly_benefit_amount": 450.00,
+    "max_benefit_amount": 11700.00,
+    "benefits_paid_to_date": 2700.00,
+    "last_payment_date": "2025-03-15",
+    "next_certification_date": "2025-03-29",
+    "employer": "TechCorp Inc.",
+    "separation_reason": "Layoff — position eliminated"
+  },
+  {
+    "claim_id": "DI-2025-7654321",
+    "program": "di",
+    "program_name": "Disability Insurance",
+    "status": "in_review",
+    "claimant": "John Smith",
+    "filed_date": "2025-03-05",
+    "weekly_benefit_amount": null,
+    "physician_name": "Dr. Maria Garcia",
+    "condition_category": "Musculoskeletal",
+    "expected_return_date": "2025-05-01",
+    "notes": ["Awaiting physician certification form DE 2525"]
+  },
+  {
+    "claim_id": "PFL-2025-9876543",
+    "program": "pfl",
+    "program_name": "Paid Family Leave",
+    "status": "pending",
+    "claimant": "Alex Chen",
+    "filed_date": "2025-03-10",
+    "weekly_benefit_amount": null,
+    "leave_type": "bonding",
+    "relationship": "New child — birth",
+    "requested_start_date": "2025-04-01",
+    "requested_duration_weeks": 8,
+    "notes": ["Bonding claim — awaiting birth certificate"]
+  }
+]

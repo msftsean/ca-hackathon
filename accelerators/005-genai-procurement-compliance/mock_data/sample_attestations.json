@@ -1,0 +1,51 @@
+[
+  {
+    "attestation_id": "ATT-2025-0001",
+    "vendor_name": "AI Solutions Corp",
+    "product_name": "DocuSense AI Platform",
+    "submission_date": "2025-02-15T10:30:00Z",
+    "ai_model_disclosed": true,
+    "model_type": "Large Language Model (GPT-4 based)",
+    "training_data_disclosed": false,
+    "bias_testing_completed": true,
+    "bias_test_results": {
+      "demographic_parity": 0.92,
+      "equalized_odds": 0.88
+    },
+    "security_assessment_completed": true,
+    "data_handling_policy": "Data processed in US-West Azure region. 90-day retention. No third-party sharing.",
+    "compliance_claims": ["SOC 2 Type II", "FedRAMP Moderate"]
+  },
+  {
+    "attestation_id": "ATT-2025-0002",
+    "vendor_name": "GovTech Analytics",
+    "product_name": "CivicAI Insights",
+    "submission_date": "2025-03-01T14:00:00Z",
+    "ai_model_disclosed": false,
+    "model_type": null,
+    "training_data_disclosed": false,
+    "bias_testing_completed": false,
+    "bias_test_results": null,
+    "security_assessment_completed": true,
+    "data_handling_policy": "All data processed on-premises within state facilities.",
+    "compliance_claims": ["SOC 2 Type I"]
+  },
+  {
+    "attestation_id": "ATT-2025-0003",
+    "vendor_name": "California Data Systems",
+    "product_name": "SmartForm Processor",
+    "submission_date": "2025-03-10T09:15:00Z",
+    "ai_model_disclosed": true,
+    "model_type": "Document Intelligence / OCR with ML classification",
+    "training_data_disclosed": true,
+    "bias_testing_completed": true,
+    "bias_test_results": {
+      "demographic_parity": 0.96,
+      "equalized_odds": 0.94,
+      "language_accuracy": {"en": 0.98, "es": 0.95, "zh": 0.91}
+    },
+    "security_assessment_completed": true,
+    "data_handling_policy": "Azure Government Cloud. 30-day retention. FIPS 140-2 encryption. Annual third-party audit.",
+    "compliance_claims": ["SOC 2 Type II", "FedRAMP High", "HIPAA"]
+  }
+]

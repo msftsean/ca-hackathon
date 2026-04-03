@@ -1,0 +1,79 @@
+[
+  {
+    "incident_id": "CA-BDF-002847",
+    "name": "Summit Fire",
+    "location": "San Bernardino National Forest",
+    "county": "San Bernardino",
+    "acres_burned": 3450.0,
+    "containment_pct": 25.0,
+    "status": "active",
+    "latitude": 34.15,
+    "longitude": -117.25,
+    "started_at": "2025-07-15T14:30:00Z",
+    "resources": {
+      "engines": 45,
+      "crews": 12,
+      "aircraft": 4,
+      "dozers": 8
+    },
+    "evacuation_zones": [
+      {
+        "zone_id": "EZ-001",
+        "name": "Crestline",
+        "level": "order",
+        "population_affected": 4500
+      },
+      {
+        "zone_id": "EZ-002",
+        "name": "Lake Arrowhead",
+        "level": "warning",
+        "population_affected": 8200
+      }
+    ]
+  },
+  {
+    "incident_id": "CA-LNU-001234",
+    "name": "Valley Fire",
+    "location": "Lake County",
+    "county": "Lake",
+    "acres_burned": 780.0,
+    "containment_pct": 60.0,
+    "status": "active",
+    "latitude": 38.85,
+    "longitude": -122.75,
+    "started_at": "2025-07-12T09:15:00Z",
+    "resources": {
+      "engines": 22,
+      "crews": 6,
+      "aircraft": 2,
+      "dozers": 3
+    },
+    "evacuation_zones": [
+      {
+        "zone_id": "EZ-003",
+        "name": "Middletown",
+        "level": "warning",
+        "population_affected": 2100
+      }
+    ]
+  },
+  {
+    "incident_id": "CA-MVU-003891",
+    "name": "Border Fire",
+    "location": "Cleveland National Forest",
+    "county": "San Diego",
+    "acres_burned": 150.0,
+    "containment_pct": 85.0,
+    "status": "contained",
+    "latitude": 32.68,
+    "longitude": -116.55,
+    "started_at": "2025-07-10T16:45:00Z",
+    "resources": {
+      "engines": 8,
+      "crews": 3,
+      "aircraft": 0,
+      "dozers": 1
+    },
+    "evacuation_zones": []
+  }
+]
